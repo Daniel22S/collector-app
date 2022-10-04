@@ -118,7 +118,7 @@ const addPlayerToArray = (playerHandleInput, playerWinInput, playerLossInput, pl
     clearField(playerLossInput);
 };
 
-const printList = (playerArray) => {
+const printList = () => {
     listOfPlayers = "";
     playerArray.forEach((objInArray, i) => {
         listOfPlayers += `
@@ -130,4 +130,5 @@ const printList = (playerArray) => {
         `;
     });
     document.getElementById("playerTable").innerHTML = listOfPlayers;
+    localStorage.setItem('playerArrayKey',JSON.stringify(playerArray));
 };
