@@ -2,6 +2,10 @@ const changeColor = (changeColorElement, color) => {
     document.getElementById(changeColorElement.id).style.backgroundColor = color;
 };
 
+const clearField = (clearFieldInput) => {
+    document.getElementById(clearFieldInput.id).value = "";
+};
+
 const isNull = (isNullInput1, isNullInput2, isNullInput3, errorPrintLocationID) => {
     let isNullTally = 0;
     if (isNullInput1 == null || isNullInput1.value == '') {
@@ -50,7 +54,7 @@ const isPlayerHandleValid = (playerHandleInput) => {
 
 const isPlayerWinsOrLossesValid = (isPlayerWinsOrLossesValidInput) => {
     //Here I cam checking that the number entered is actually just a number
-    if (/[0-9]+$/.test(isPlayerWinsOrLossesValidInput.value)) {
+    if (/^[0-9]+$/.test(isPlayerWinsOrLossesValidInput.value)) {
         return true;
     };
     return false;
@@ -109,16 +113,19 @@ const addPlayerToArray = (playerHandleInput, playerWinInput, playerLossInput, pl
         losses: playerLossInput.value,
         winPercentage: percentage(playerWinInput, playerLossInput)
     });
+    clearField(playerHandleInput);
+    clearField(playerWinInput);
+    clearField(playerLossInput);
 };
 
 const printList = (playerArray) => {
     listOfPlayers = "";
     playerArray.forEach((objInArray, i) => {
         listOfPlayers += `
-        <li>Player: ${objInArray.player}
-        <br>Wins: ${objInArray.wins}
-        <br>Losses: ${objInArray.losses}
-        <br>Win%: <strong>${objInArray.winPercentage}%</strong>
+        <li class="listOfPlayers">${objInArray.player}
+        <br>${objInArray.wins} Wins
+        <br>${objInArray.losses} Losses
+        <br>Win Rate: <strong>${objInArray.winPercentage}%</strong>
         <br></li>
         `;
     });

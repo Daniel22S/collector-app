@@ -3,13 +3,27 @@ body {
     margin-right: 20vw;
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
+    justify-content: space-around;
     background-color: mediumseagreen;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+    font-family:'Trebuchet MS';
+}
+
+ul#playerTable{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
 .errorList {
     color: pink;
     font-size: small;
+}
+
+li.listOfPlayers {
+    border-radius: 5px;
+    border: 2px;
+    background-color: white;
+    color: black;
+    margin-bottom: 10px;
+    padding: 5px;
 }
