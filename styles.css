@@ -1,6 +1,6 @@
 body {
-    margin-left: 20vw;
-    margin-right: 20vw;
+    margin-left: 30vw;
+    margin-right: 30vw;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -8,10 +8,17 @@ body {
     font-family:'Trebuchet MS';
 }
 
+/* main {
+    position: fixed;
+    float: right;
+} */
+
 ul#playerTable{
     list-style-type: none;
     padding: 0;
     margin: 0;
+    position: relative;
+    float: right;
 }
 
 .errorList {
@@ -47,4 +54,10 @@ li.listOfPlayers {
 
 #nullErrorPrint {
     display: none;
+}
+
+.cardTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }

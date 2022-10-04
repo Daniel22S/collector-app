@@ -36,6 +36,12 @@ const removePlayer = (removePlayerIndex) => {
     printList();
 };
 
+const clearPlayers = () => {
+    playerArray = [];
+    printList();
+};
+
+
 const editPlayer = (playerHandleInput, playerWinInput, playerLossInput, playerPictureInput, errorPrintLocationID, editedPlayerIndex) => {
     changeColor(playerHandleInput, "white");
     changeColor(playerWinInput, "white");

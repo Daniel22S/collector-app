@@ -147,13 +147,18 @@ const printList = () => {
         listOfPlayers += `
         <li class="listOfPlayers">
         <img class="playerImages" src="${objInArray.image}" alt="">
-        <br>${objInArray.player}
-        <br>${objInArray.wins} Wins
+        <br>
+            <div class="cardTitle"> ${objInArray.player}
+            <div class="optionsIcons">
+            <input type="image" src="./media/editicon.png" onclick="revealEditForm(${i}, '${objInArray.player}')">
+            <input type="image" src="./media/removeicon.png" onclick="removePlayer(${i})">
+            </div>
+            </div>
+        <br><font size="+3"><strong>${objInArray.winPercentage}%</strong></font>
+        <br>win rate
+        <br><br>${objInArray.wins} Wins
         <br>${objInArray.losses} Losses
-        <br>Win Rate: <strong>${objInArray.winPercentage}%</strong>
         <br><br>
-        <input type="image" src="./media/editicon.png" onclick="revealEditForm(${i}, '${objInArray.player}')">
-        <input type="image" src="./media/removeicon.png" onclick="removePlayer(${i})">
         </li>
         `;
     });
