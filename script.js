@@ -1,4 +1,4 @@
-let playerArray =[];
+let playerArray =  JSON.parse(localStorage.getItem('playerArrayKey')) || [];
 
 function addPlayer (playerHandleInput, playerWinInput, playerLossInput, errorPrintLocationID) {
     //First need to set up the constants and basic formatting required later on
@@ -25,7 +25,7 @@ function addPlayer (playerHandleInput, playerWinInput, playerLossInput, errorPri
     addPlayerToArray(playerHandleInput, playerWinInput, playerLossInput, playerArray);
     console.log(playerArray[0]);
     //Finally need to list the array into the unordered list with id="playerTable"
-    printList(playerArray);
+    printList();
 
     //Then return true idk
 };
