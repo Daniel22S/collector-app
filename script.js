@@ -1,6 +1,6 @@
 let playerArray =  JSON.parse(localStorage.getItem('playerArrayKey')) || [];
 
-function addPlayer (playerHandleInput, playerWinInput, playerLossInput, errorPrintLocationID) {
+function addPlayer (playerHandleInput, playerWinInput, playerLossInput, playerPictureInput, errorPrintLocationID) {
     //First need to set up the constants and basic formatting required later on
     changeColor(playerHandleInput, "white");
     changeColor(playerWinInput, "white");
@@ -22,7 +22,7 @@ function addPlayer (playerHandleInput, playerWinInput, playerLossInput, errorPri
 
     //Then need to add the player details to an array as an object (further subfunction)
     // + calculate the win/loss percentage and give that as a fourth key/value in the object
-    addPlayerToArray(playerHandleInput, playerWinInput, playerLossInput, playerArray);
+    addPlayerToArray(playerHandleInput, playerWinInput, playerLossInput, playerPictureInput, playerArray);
     console.log(playerArray[0]);
     //Finally need to list the array into the unordered list with id="playerTable"
     printList();

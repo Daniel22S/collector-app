@@ -106,8 +106,9 @@ const percentage = (numerator, denominator) => {
     return result.toFixed(1);
 };
 
-const addPlayerToArray = (playerHandleInput, playerWinInput, playerLossInput, playerArray) => {
+const addPlayerToArray = (playerHandleInput, playerWinInput, playerLossInput, playerPictureInput, playerArray) => {
     playerArray.push({
+        image: playerPictureInput.value,
         player: playerHandleInput.value,
         wins: playerWinInput.value,
         losses: playerLossInput.value,
@@ -116,13 +117,17 @@ const addPlayerToArray = (playerHandleInput, playerWinInput, playerLossInput, pl
     clearField(playerHandleInput);
     clearField(playerWinInput);
     clearField(playerLossInput);
+    clearField(playerPictureInput);
 };
 
 const printList = () => {
     listOfPlayers = "";
     playerArray.forEach((objInArray, i) => {
+        console.log(objInArray.image)
         listOfPlayers += `
-        <li class="listOfPlayers">${objInArray.player}
+        <li class="listOfPlayers">
+        <img class="playerImages" src="${objInArray.image}" alt="">
+        <br>${objInArray.player}
         <br>${objInArray.wins} Wins
         <br>${objInArray.losses} Losses
         <br>Win Rate: <strong>${objInArray.winPercentage}%</strong>
