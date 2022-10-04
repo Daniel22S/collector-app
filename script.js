@@ -1,6 +1,7 @@
+let playerArray =[];
+
 function addPlayer (playerHandleInput, playerWinInput, playerLossInput, errorPrintLocationID) {
     //First need to set up the constants and basic formatting required later on
-    let playerArray =[];
     changeColor(playerHandleInput, "white");
     changeColor(playerWinInput, "white");
     changeColor(playerLossInput, "white");
@@ -21,10 +22,10 @@ function addPlayer (playerHandleInput, playerWinInput, playerLossInput, errorPri
 
     //Then need to add the player details to an array as an object (further subfunction)
     // + calculate the win/loss percentage and give that as a fourth key/value in the object
-    addPlayerToArray = (playerHandleInput, playerWinInput, playerLossInput, playerArray);
+    addPlayerToArray(playerHandleInput, playerWinInput, playerLossInput, playerArray);
     console.log(playerArray[0]);
     //Finally need to list the array into the unordered list with id="playerTable"
-
+    printList(playerArray);
 
     //Then return true idk
 };

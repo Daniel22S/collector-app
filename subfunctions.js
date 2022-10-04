@@ -23,11 +23,25 @@ const isNull = (isNullInput1, isNullInput2, isNullInput3, errorPrintLocationID) 
     return false;
 };    
 
+const isPlayerHandleUnique = (isPlayerHandleUniqueInput) => {
+    let uniqueTally = 0;
+    playerArray.forEach((objInArray, i) => {
+        console.log(isPlayerHandleUniqueInput.value);
+        console.log(objInArray.player);
+        if (isPlayerHandleUniqueInput.value === objInArray.player) {
+            uniqueTally++;
+        }
+    });
+    if (uniqueTally !== 0) {
+        return false;
+    };
+    return true;
+};
+
 const isPlayerHandleValid = (playerHandleInput) => {
     //Here I want to check both that the handle is made up
     if (
         /^[A-Za-z0-9 ]+$/.test(playerHandleInput.value)
-        // && checking it is unique
         ) {
         return true;
     };
@@ -45,12 +59,17 @@ const isPlayerWinsOrLossesValid = (isPlayerWinsOrLossesValidInput) => {
 const validationSuite = (playerHandleInput, playerWinInput, playerLossInput) => {
     let errorTally = 0;
     
-    //Need to validate the username
+    //Need to validate the username as both valid and unique compared to previous entries
     if (isPlayerHandleValid(playerHandleInput)) {
     } else {
         changeColor(playerHandleInput, "pink")
         document.getElementById(playerHandleInput.id + "Error").innerHTML += "Handle needs to be only Letters, Numbers, and Spaces <br>";
         errorTally++;
+    };
+    if (!isPlayerHandleUnique(playerHandleInput)) {
+        changeColor(playerHandleInput, "pink")
+        document.getElementById(playerHandleInput.id + "Error").innerHTML += "Handle needs to be unique<br>";
+        errorTally++; 
     };
     //Need to validate the wins and losses
     if (isPlayerWinsOrLossesValid(playerWinInput)) {
@@ -72,17 +91,36 @@ const validationSuite = (playerHandleInput, playerWinInput, playerLossInput) => 
     //Need two subfunctions, isPlayerHandleValid() and isPlayerWinsOrLossesValid()
 };
 
-const percentage = (numerator, demoninator) => {
-    let result = numerator.value / demoninator.value;
+const percentage = (numerator, denominator) => {
+    let wins = Number(numerator.value);
+    console.log(wins);
+    let games = Number(numerator.value) + Number(denominator.value);
+    console.log(games);
+    let result = wins / games;
+    console.log(result);
     result = result * 100;
-    return Math.trunc(result);
+    return result.toFixed(1);
 };
 
 const addPlayerToArray = (playerHandleInput, playerWinInput, playerLossInput, playerArray) => {
     playerArray.push({
-        Player: playerHandleInput.value,
-        Wins: playerWinInput.value,
-        Losses: playerLossInput.value,
-        'Win%': percentage(playerWinInput, playerLossInput)
+        player: playerHandleInput.value,
+        wins: playerWinInput.value,
+        losses: playerLossInput.value,
+        winPercentage: percentage(playerWinInput, playerLossInput)
     });
+};
+
+const printList = (playerArray) => {
+    listOfPlayers = "";
+    playerArray.forEach((objInArray, i) => {
+        listOfPlayers += `
+        <li>Player: ${objInArray.player}
+        <br>Wins: ${objInArray.wins}
+        <br>Losses: ${objInArray.losses}
+        <br>Win%: ${objInArray.winPercentage}%
+        <br></li>
+        `;
+    });
+    document.getElementById("playerTable").innerHTML = listOfPlayers;
 };
