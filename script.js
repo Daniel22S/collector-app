@@ -29,3 +29,8 @@ function addPlayer (playerHandleInput, playerWinInput, playerLossInput, errorPri
 
     //Then return true idk
 };
+
+const removePlayer = (removePlayerIndex) => {
+    playerArray.splice(removePlayerIndex, 1);
+    printList();
+};
