@@ -5,11 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dan's Unit 2 Project</title>
-    <!-- <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./styles.css">
     <script defer src="./subfunctions.js"></script>
-    <script defer src="./script.js"></script> -->
+    <script defer src="./script.js"></script>
 </head>
 <body>
-    
+    <main>
+        <p class="errorList" id="nullErrorPrint"></p>
+        <form id="entryForm">
+            <label for="addPlayerHandleInput">Player Handle</label><br>
+            <input type="text" name="addPlayerHandleInput" id="addPlayerHandleInput">
+            <p class="errorList" id="addPlayerHandleInputError"></p><br>
+            <label for="addPlayerWinInput">Player Wins</label><br>
+            <input type="text" name="addPlayerWinInput" id="addPlayerWinInput">
+            <p class="errorList" id="addPlayerWinInputError"></p><br>
+            <label for="addPlayerLossInput">Player Losses</label><br>
+            <input type="text" name="addPlayerLossInput" id="addPlayerLossInput">
+            <p class="errorList" id="addPlayerLossInputError"></p><br>
+            <input 
+                type="button" 
+                value="Add Player to Table" 
+                name="addPlayerButton" 
+                id="button-add"
+                onclick="addPlayer(addPlayerHandleInput, addPlayerWinInput, addPlayerLossInput, 'nullErrorPrint')">
+        </form>
+    </main>
+    <div>
+        <ul id="playerTable">
+
+        </ul>
+    </div>
 </body>
 </html>
