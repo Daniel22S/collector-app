@@ -118,7 +118,7 @@ const printList = (playerArray) => {
         <li>Player: ${objInArray.player}
         <br>Wins: ${objInArray.wins}
         <br>Losses: ${objInArray.losses}
-        <br>Win%: ${objInArray.winPercentage}%
+        <br>Win%: <strong>${objInArray.winPercentage}%</strong>
         <br></li>
         `;
     });
