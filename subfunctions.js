@@ -126,7 +126,8 @@ const printList = () => {
         <br>${objInArray.wins} Wins
         <br>${objInArray.losses} Losses
         <br>Win Rate: <strong>${objInArray.winPercentage}%</strong>
-        <br></li>
+        <br><br><input type="button" value="remove" onclick="removePlayer(${i})"
+        </li>
         `;
     });
     document.getElementById("playerTable").innerHTML = listOfPlayers;
