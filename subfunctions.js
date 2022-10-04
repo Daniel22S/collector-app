@@ -2,7 +2,8 @@ const changeColor = (changeColorElement, color) => {
     document.getElementById(changeColorElement.id).style.backgroundColor = color;
 };
 
-const clearField = (clearFieldInput) => {
+const clearField = (event, clearFieldInput) => {
+    event.preventDefault();
     document.getElementById(clearFieldInput.id).value = "";
 };
 
@@ -21,6 +22,7 @@ const isNull = (isNullInput1, isNullInput2, isNullInput3, errorPrintLocationID) 
         isNullTally++;
     }
     if (isNullTally !== 0) {
+        document.getElementById(errorPrintLocationID).style.display = "block"
         document.getElementById(errorPrintLocationID).innerHTML += "Fill All Fields";
         return true;
     };
@@ -60,7 +62,7 @@ const isPlayerWinsOrLossesValid = (isPlayerWinsOrLossesValidInput) => {
     return false;
 };
 
-const validationSuite = (playerHandleInput, playerWinInput, playerLossInput) => {
+const validationSuite = (playerHandleInput, playerWinInput, playerLossInput, editBoolean) => {
     let errorTally = 0;
     
     //Need to validate the username as both valid and unique compared to previous entries
@@ -70,7 +72,9 @@ const validationSuite = (playerHandleInput, playerWinInput, playerLossInput) => 
         document.getElementById(playerHandleInput.id + "Error").innerHTML += "Handle needs to be only Letters, Numbers, and Spaces <br>";
         errorTally++;
     };
-    if (!isPlayerHandleUnique(playerHandleInput)) {
+    if (!isPlayerHandleUnique(playerHandleInput)
+        && 
+        editBoolean === false) {
         changeColor(playerHandleInput, "pink")
         document.getElementById(playerHandleInput.id + "Error").innerHTML += "Handle needs to be unique<br>";
         errorTally++; 
@@ -106,30 +110,58 @@ const percentage = (numerator, denominator) => {
     return result.toFixed(1);
 };
 
-const addPlayerToArray = (playerHandleInput, playerWinInput, playerLossInput, playerArray) => {
+const addPlayerToArray = (playerHandleInput, playerWinInput, playerLossInput, playerPictureInput, playerArray) => {
     playerArray.push({
+        image: playerPictureInput.value,
         player: playerHandleInput.value,
         wins: playerWinInput.value,
         losses: playerLossInput.value,
         winPercentage: percentage(playerWinInput, playerLossInput)
     });
-    clearField(playerHandleInput);
-    clearField(playerWinInput);
-    clearField(playerLossInput);
+    clearField(event, playerHandleInput);
+    clearField(event, playerWinInput);
+    clearField(event, playerLossInput);
+    clearField(event, playerPictureInput);
+};
+
+const editPlayerInArray = (editPlayerHandleInput, editPlayerWinInput, editPlayerLossInput, editPlayerPictureInput, playerArray, editedPlayerIndex) => {
+    playerArray.splice(editedPlayerIndex, 1, {
+        image: editPlayerPictureInput.value,
+        player: editPlayerHandleInput.value,
+        wins: editPlayerWinInput.value,
+        losses: editPlayerLossInput.value,
+        winPercentage: percentage(editPlayerWinInput, editPlayerLossInput)
+    });
+    clearField(event, editPlayerHandleInput);
+    clearField(event, editPlayerWinInput);
+    clearField(event, editPlayerLossInput);
+    clearField(event, editPlayerPictureInput);
+    document.getElementById("entryForm").style.display = "block";
+    document.getElementById("editForm").style.display = "none";
 };
 
 const printList = () => {
     listOfPlayers = "";
     playerArray.forEach((objInArray, i) => {
+        console.log(objInArray.image)
         listOfPlayers += `
-        <li class="listOfPlayers">${objInArray.player}
+        <li class="listOfPlayers">
+        <img class="playerImages" src="${objInArray.image}" alt="">
+        <br>${objInArray.player}
         <br>${objInArray.wins} Wins
         <br>${objInArray.losses} Losses
         <br>Win Rate: <strong>${objInArray.winPercentage}%</strong>
-        <br><br><input type="button" value="remove" onclick="removePlayer(${i})"
+        <br><br>
+        <input type="image" src="./media/editicon.png" onclick="revealEditForm(${i}, '${objInArray.player}')">
+        <input type="image" src="./media/removeicon.png" onclick="removePlayer(${i})">
         </li>
         `;
     });
     document.getElementById("playerTable").innerHTML = listOfPlayers;
     localStorage.setItem('playerArrayKey',JSON.stringify(playerArray));
+};
+
+const cancelEdit = () => {
+    document.getElementById("entryForm").style.display = "block";
+    document.getElementById("editForm").style.display = "none";
 };
