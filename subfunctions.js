@@ -150,6 +150,7 @@ const addPlayerToArray = (playerHandleInput, playerWinInput, playerLossInput, pl
     clearField(event, playerWinInput);
     clearField(event, playerLossInput);
     clearField(event, playerPictureInput);
+    addDataURL = null;
 };
 
 const editPlayerInArray = (editPlayerHandleInput, editPlayerWinInput, editPlayerLossInput, editPlayerPictureInput, playerArray, editedPlayerIndex) => {
@@ -177,6 +178,7 @@ const editPlayerInArray = (editPlayerHandleInput, editPlayerWinInput, editPlayer
     clearField(event, editPlayerPictureInput);
     document.getElementById("entryForm").style.display = "block";
     document.getElementById("editForm").style.display = "none";
+    editDataURL = null;
 };
 
 const printList = () => {

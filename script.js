@@ -58,13 +58,14 @@ const editPlayer = (playerHandleInput, playerWinInput, playerLossInput, playerPi
     if (!validationSuite(playerHandleInput, playerWinInput, playerLossInput, true)) {
         return false;
     };
-
+    console.log(editedPlayerIndex);
     editPlayerInArray(playerHandleInput, playerWinInput, playerLossInput, playerPictureInput, playerArray, editedPlayerIndex);
     //Finally need to list the array into the unordered list with id="playerTable"
     printList();
 };
 
 const revealEditForm = (revealEditFormIndex, playerHandle, playerWins, playerLosses, playerImage) => {
+    console.log(revealEditFormIndex);
     document.getElementById("entryForm").style.display = "none";
     document.getElementById("editForm").style.display = "block";
     let editFormHTML = "";
