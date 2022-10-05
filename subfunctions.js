@@ -5,6 +5,27 @@ const changeColor = (changeColorElement, color) => {
 const clearField = (event, clearFieldInput) => {
     event.preventDefault();
     document.getElementById(clearFieldInput.id).value = "";
+};``
+
+const readerReading = (pictureInputField) => {
+    document.getElementById(pictureInputField) = reader.readAsDataURL(pictureInputField.files[0]);
+};
+
+let addReader = new FileReader();
+let editReader = new FileReader();
+const addPictureInput = document.getElementById('addPlayerPictureInput');
+addPictureInput.onchange = () => {
+    addReader.readAsDataURL(addPictureInput.files[0]);
+};
+let addDataURL;
+let editDataURL;
+addReader.onload = () => {
+    addDataURL = addReader.result;
+    console.log(addDataURL);
+};
+editReader.onload = () => {
+    editDataURL = editReader.result;
+    console.log(editDataURL);
 };
 
 const isNull = (isNullInput1, isNullInput2, isNullInput3, errorPrintLocationID) => {
@@ -105,14 +126,26 @@ const percentage = (numerator, denominator) => {
     return result.toFixed(1);
 };
 
+let defaultImageURL = './media/default.png'
+
 const addPlayerToArray = (playerHandleInput, playerWinInput, playerLossInput, playerPictureInput, playerArray) => {
-    playerArray.push({
-        image: playerPictureInput.value,
-        player: playerHandleInput.value,
-        wins: playerWinInput.value,
-        losses: playerLossInput.value,
-        winPercentage: percentage(playerWinInput, playerLossInput)
-    });
+    if (!addDataURL) {
+        playerArray.push({
+            image: defaultImageURL,
+            player: playerHandleInput.value,
+            wins: playerWinInput.value,
+            losses: playerLossInput.value,
+            winPercentage: percentage(playerWinInput, playerLossInput)
+        });
+    } else {
+        playerArray.push({
+            image: addDataURL,
+            player: playerHandleInput.value,
+            wins: playerWinInput.value,
+            losses: playerLossInput.value,
+            winPercentage: percentage(playerWinInput, playerLossInput)
+        })
+    };
     clearField(event, playerHandleInput);
     clearField(event, playerWinInput);
     clearField(event, playerLossInput);
@@ -120,13 +153,24 @@ const addPlayerToArray = (playerHandleInput, playerWinInput, playerLossInput, pl
 };
 
 const editPlayerInArray = (editPlayerHandleInput, editPlayerWinInput, editPlayerLossInput, editPlayerPictureInput, playerArray, editedPlayerIndex) => {
-    playerArray.splice(editedPlayerIndex, 1, {
-        image: editPlayerPictureInput.value,
-        player: editPlayerHandleInput.value,
-        wins: editPlayerWinInput.value,
-        losses: editPlayerLossInput.value,
-        winPercentage: percentage(editPlayerWinInput, editPlayerLossInput)
-    });
+    let originalPlayerPicture = playerArray[editedPlayerIndex].image;
+    if (editDataURL) {
+        playerArray.splice(editedPlayerIndex, 1, {
+            image: editDataURL,
+            player: editPlayerHandleInput.value,
+            wins: editPlayerWinInput.value,
+            losses: editPlayerLossInput.value,
+            winPercentage: percentage(editPlayerWinInput, editPlayerLossInput)
+        });
+    } else {
+        playerArray.splice(editedPlayerIndex, 1, {
+            image: originalPlayerPicture,
+            player: editPlayerHandleInput.value,
+            wins: editPlayerWinInput.value,
+            losses: editPlayerLossInput.value,
+            winPercentage: percentage(editPlayerWinInput, editPlayerLossInput)
+        });
+    };
     clearField(event, editPlayerHandleInput);
     clearField(event, editPlayerWinInput);
     clearField(event, editPlayerLossInput);
@@ -139,9 +183,9 @@ const printList = () => {
     listOfPlayers = "";
     playerArray.forEach((objInArray, i) => {
         listOfPlayers += `
-        <li class="listOfPlayers">
+        <li class="listOfPlayers" id="player-index-${i}">
         <div class="imageHolder">
-        <img class="playerImages" src="./media/instagradient.png">
+        <img class="playerImages" src="${objInArray.image}">
         </div>
         <div class="cardTextHolder">
             <div class="cardTitleBar">
@@ -151,7 +195,7 @@ const printList = () => {
                 <div class="cardButtons">
                     <input type="image" class="iconButton" 
                     src="./media/editicon.png" 
-                    onclick="revealEditForm(${i}, '${objInArray.player}', ${objInArray.image})"
+                    onclick="revealEditForm(${i}, '${objInArray.player}', '${objInArray.wins}', '${objInArray.losses}', '${objInArray.image}')"
                     >
                     <input type="image" class="iconButton" 
                     src="./media/removeicon.png" 

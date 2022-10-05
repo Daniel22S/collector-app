@@ -1,6 +1,6 @@
-let playerArray =  JSON.parse(localStorage.getItem('playerArrayKey')) || [];
+let playerArray = JSON.parse(localStorage.getItem('playerArrayKey')) || [];
 
-function addPlayer (playerHandleInput, playerWinInput, playerLossInput, playerPictureInput, errorPrintLocationID) {
+function addPlayer(playerHandleInput, playerWinInput, playerLossInput, playerPictureInput, errorPrintLocationID) {
     //First need to set up the constants and basic formatting required later on
     changeColor(playerHandleInput, "white");
     changeColor(playerWinInput, "white");
@@ -12,7 +12,7 @@ function addPlayer (playerHandleInput, playerWinInput, playerLossInput, playerPi
     document.getElementById(errorPrintLocationID).innerHTML = "";
 
     //Then check that the boxes are not null (requires a subfunction)
-    if(isNull(playerHandleInput, playerWinInput, playerLossInput, errorPrintLocationID)) {
+    if (isNull(playerHandleInput, playerWinInput, playerLossInput, errorPrintLocationID)) {
         return false;
     };
 
@@ -51,7 +51,7 @@ const editPlayer = (playerHandleInput, playerWinInput, playerLossInput, playerPi
     document.getElementById(errorPrintLocationID).style.display = "none"
     document.getElementById(errorPrintLocationID).innerHTML = "";
 
-    if(isNull(playerHandleInput, playerWinInput, playerLossInput, errorPrintLocationID)) {
+    if (isNull(playerHandleInput, playerWinInput, playerLossInput, errorPrintLocationID)) {
         return false;
     };
 
@@ -64,26 +64,29 @@ const editPlayer = (playerHandleInput, playerWinInput, playerLossInput, playerPi
     printList();
 };
 
-const revealEditForm = (revealEditFormIndex, playerHandle, playerImage) => {
+const revealEditForm = (revealEditFormIndex, playerHandle, playerWins, playerLosses, playerImage) => {
     document.getElementById("entryForm").style.display = "none";
     document.getElementById("editForm").style.display = "block";
     let editFormHTML = "";
     editFormHTML += `
         <h2>Edit Player<br><font size="+3">${playerHandle}</font></h2>
-        <p class="errorList" id="editNullErrorPrint"></p>
-        <label for="editPlayerHandleInput">Player Handle</label><br>
-        <input type="text name="editPlayerHandleInput" id="editPlayerHandleInput" maxlength="20">
-        <p class="errorList" id="editPlayerHandleInputError"></p><br>
-        <label for="editPlayerWinInput">Player Wins</label><br>
-        <input type="text" name="editPlayerWinInput" id="editPlayerWinInput" maxlength="10">
-        <p class="errorList" id="editPlayerWinInputError"></p><br>
-        <label for="editPlayerLossInput">Player Losses</label><br>
-        <input type="text" name="editPlayerLossInput" id="editPlayerLossInput" maxlength="10">
-        <p class="errorList" id="editPlayerLossInputError"></p><br>
-        <label for="editPlayerPictureInput">Player Picture</label><br>
         <div class="imageHolder">
             <img class="playerImages" src="${playerImage}">
         </div>
+        <p class="errorList" id="editNullErrorPrint"></p>
+        <label for="editPlayerHandleInput">Player Handle</label><br>
+        <input type="text name="editPlayerHandleInput" id="editPlayerHandleInput" 
+            maxlength="20" value="${playerHandle}">
+        <p class="errorList" id="editPlayerHandleInputError"></p><br>
+        <label for="editPlayerWinInput">Player Wins</label><br>
+        <input type="text" name="editPlayerWinInput" id="editPlayerWinInput"
+            maxlength="10" value="${playerWins}">
+        <p class="errorList" id="editPlayerWinInputError"></p><br>
+        <label for="editPlayerLossInput">Player Losses</label><br>
+        <input type="text" name="editPlayerLossInput" id="editPlayerLossInput"
+            maxlength="10" value="${playerLosses}">
+        <p class="errorList" id="editPlayerLossInputError"></p><br>
+        <label for="editPlayerPictureInput">Player Picture</label><br>
         <input type="file" accept=".png, .jpg, .jpeg, .tiff, .svg, .ico"
         name="editPlayerPictureInput" id="editPlayerPictureInput">
         <input type="image" class="iconButton" src="./media/removeimageicon.png"
@@ -104,4 +107,8 @@ const revealEditForm = (revealEditFormIndex, playerHandle, playerImage) => {
             onclick="cancelEdit()">
     `;
     document.getElementById("editForm").innerHTML = editFormHTML;
+    const editPictureInput = document.getElementById('editPlayerPictureInput');
+    editPictureInput.onchange = () => {
+        editReader.readAsDataURL(editPictureInput.files[0]);
+    };
 };
