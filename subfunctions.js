@@ -5,6 +5,27 @@ const changeColor = (changeColorElement, color) => {
 const clearField = (event, clearFieldInput) => {
     event.preventDefault();
     document.getElementById(clearFieldInput.id).value = "";
+};``
+
+const readerReading = (pictureInputField) => {
+    document.getElementById(pictureInputField) = reader.readAsDataURL(pictureInputField.files[0]);
+};
+
+let addReader = new FileReader();
+let editReader = new FileReader();
+const addPictureInput = document.getElementById('addPlayerPictureInput');
+addPictureInput.onchange = () => {
+    addReader.readAsDataURL(addPictureInput.files[0]);
+};
+let addDataURL;
+let editDataURL;
+addReader.onload = () => {
+    addDataURL = addReader.result;
+    console.log(addDataURL);
+};
+editReader.onload = () => {
+    editDataURL = editReader.result;
+    console.log(editDataURL);
 };
 
 const isNull = (isNullInput1, isNullInput2, isNullInput3, errorPrintLocationID) => {
@@ -32,8 +53,6 @@ const isNull = (isNullInput1, isNullInput2, isNullInput3, errorPrintLocationID) 
 const isPlayerHandleUnique = (isPlayerHandleUniqueInput) => {
     let uniqueTally = 0;
     playerArray.forEach((objInArray, i) => {
-        console.log(isPlayerHandleUniqueInput.value);
-        console.log(objInArray.player);
         if (isPlayerHandleUniqueInput.value === objInArray.player) {
             uniqueTally++;
         }
@@ -101,23 +120,32 @@ const validationSuite = (playerHandleInput, playerWinInput, playerLossInput, edi
 
 const percentage = (numerator, denominator) => {
     let wins = Number(numerator.value);
-    console.log(wins);
     let games = Number(numerator.value) + Number(denominator.value);
-    console.log(games);
     let result = wins / games;
-    console.log(result);
     result = result * 100;
     return result.toFixed(1);
 };
 
+let defaultImageURL = './media/default.png'
+
 const addPlayerToArray = (playerHandleInput, playerWinInput, playerLossInput, playerPictureInput, playerArray) => {
-    playerArray.push({
-        image: playerPictureInput.value,
-        player: playerHandleInput.value,
-        wins: playerWinInput.value,
-        losses: playerLossInput.value,
-        winPercentage: percentage(playerWinInput, playerLossInput)
-    });
+    if (!addDataURL) {
+        playerArray.push({
+            image: defaultImageURL,
+            player: playerHandleInput.value,
+            wins: playerWinInput.value,
+            losses: playerLossInput.value,
+            winPercentage: percentage(playerWinInput, playerLossInput)
+        });
+    } else {
+        playerArray.push({
+            image: addDataURL,
+            player: playerHandleInput.value,
+            wins: playerWinInput.value,
+            losses: playerLossInput.value,
+            winPercentage: percentage(playerWinInput, playerLossInput)
+        })
+    };
     clearField(event, playerHandleInput);
     clearField(event, playerWinInput);
     clearField(event, playerLossInput);
@@ -125,13 +153,24 @@ const addPlayerToArray = (playerHandleInput, playerWinInput, playerLossInput, pl
 };
 
 const editPlayerInArray = (editPlayerHandleInput, editPlayerWinInput, editPlayerLossInput, editPlayerPictureInput, playerArray, editedPlayerIndex) => {
-    playerArray.splice(editedPlayerIndex, 1, {
-        image: editPlayerPictureInput.value,
-        player: editPlayerHandleInput.value,
-        wins: editPlayerWinInput.value,
-        losses: editPlayerLossInput.value,
-        winPercentage: percentage(editPlayerWinInput, editPlayerLossInput)
-    });
+    let originalPlayerPicture = playerArray[editedPlayerIndex].image;
+    if (editDataURL) {
+        playerArray.splice(editedPlayerIndex, 1, {
+            image: editDataURL,
+            player: editPlayerHandleInput.value,
+            wins: editPlayerWinInput.value,
+            losses: editPlayerLossInput.value,
+            winPercentage: percentage(editPlayerWinInput, editPlayerLossInput)
+        });
+    } else {
+        playerArray.splice(editedPlayerIndex, 1, {
+            image: originalPlayerPicture,
+            player: editPlayerHandleInput.value,
+            wins: editPlayerWinInput.value,
+            losses: editPlayerLossInput.value,
+            winPercentage: percentage(editPlayerWinInput, editPlayerLossInput)
+        });
+    };
     clearField(event, editPlayerHandleInput);
     clearField(event, editPlayerWinInput);
     clearField(event, editPlayerLossInput);
@@ -143,17 +182,37 @@ const editPlayerInArray = (editPlayerHandleInput, editPlayerWinInput, editPlayer
 const printList = () => {
     listOfPlayers = "";
     playerArray.forEach((objInArray, i) => {
-        console.log(objInArray.image)
         listOfPlayers += `
-        <li class="listOfPlayers">
-        <img class="playerImages" src="${objInArray.image}" alt="">
-        <br>${objInArray.player}
-        <br>${objInArray.wins} Wins
-        <br>${objInArray.losses} Losses
-        <br>Win Rate: <strong>${objInArray.winPercentage}%</strong>
-        <br><br>
-        <input type="image" src="./media/editicon.png" onclick="revealEditForm(${i}, '${objInArray.player}')">
-        <input type="image" src="./media/removeicon.png" onclick="removePlayer(${i})">
+        <li class="listOfPlayers" id="player-index-${i}">
+        <div class="imageHolder">
+        <img class="playerImages" src="${objInArray.image}">
+        </div>
+        <div class="cardTextHolder">
+            <div class="cardTitleBar">
+                <div class="cardTitle">
+                    <font size="+3">${objInArray.player}</font>
+                </div>
+                <div class="cardButtons">
+                    <input type="image" class="iconButton" 
+                    src="./media/editicon.png" 
+                    onclick="revealEditForm(${i}, '${objInArray.player}', '${objInArray.wins}', '${objInArray.losses}', '${objInArray.image}')"
+                    >
+                    <input type="image" class="iconButton" 
+                    src="./media/removeicon.png" 
+                    onclick="removePlayer(${i})"
+                    >
+                </div>
+            </div>
+            <div class="cardStats">
+                <div class="cardWLRatio">
+                    <font size="+5"><strong>${objInArray.winPercentage}%</strong></font>
+                </div>
+                <div class="cardWAndL">
+                    ${objInArray.wins} Win/s<br>
+                    ${objInArray.losses} Loss/es
+                </div>
+            </div>
+        </div>
         </li>
         `;
     });
