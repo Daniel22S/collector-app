@@ -7,30 +7,30 @@
     <title>Dan's Unit 2 Project</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abel&family=Comfortaa:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles.css">
     <script defer src="./subfunctions.js"></script>
     <script defer src="./script.js"></script>
 </head>
 <body onload="printList()">
+    <h1>Dan's <em>Stupendous, Multifaceted</em> Games Table</h1>
+    <h3>Please use this to capture player records for whatever game/s you are playing</h3>
     <main>
-        <p class="errorList" id="nullErrorPrint"></p>
         <form class="myForms" id="entryForm">
             <h2>Add New Player</h2>
+            <p class="errorList" id="nullErrorPrint"></p>
             <label for="addPlayerHandleInput">Player Handle</label><br>
-            <input type="text" name="addPlayerHandleInput" id="addPlayerHandleInput">
+            <input type="text" name="addPlayerHandleInput" id="addPlayerHandleInput" maxlength="20">
             <p class="errorList" id="addPlayerHandleInputError"></p><br>
             <label for="addPlayerWinInput">Player Wins</label><br>
-            <input type="text" name="addPlayerWinInput" id="addPlayerWinInput">
+            <input type="text" name="addPlayerWinInput" id="addPlayerWinInput" maxlength="10">
             <p class="errorList" id="addPlayerWinInputError"></p><br>
             <label for="addPlayerLossInput">Player Losses</label><br>
-            <input type="text" name="addPlayerLossInput" id="addPlayerLossInput">
+            <input type="text" name="addPlayerLossInput" id="addPlayerLossInput" maxlength="10">
             <p class="errorList" id="addPlayerLossInputError"></p><br>
             <label for="addPlayerPictureInput">Player Picture</label><br>
             <input type="file" accept=".png, .jpg, .jpeg, .tiff, .svg, .ico" 
                 name="addPlayerPictureInput" id="addPlayerPictureInput">
-            <!-- <input type="button" value="Clear Image" name="clearImageButton"
-            onclick="clearField(addPlayerPictureInput)"> -->
             <input type="image" class="iconButton" src="./media/removeimageicon.png"
                 onclick="clearField(event, addPlayerPictureInput)"><br><br>
             <input 
@@ -48,10 +48,8 @@
         </form>
         <form class="myForms" id="editForm"></form>
     </main>
-    <div>
-        <ul id="playerTable">
-
-        </ul>
+    <div class="playerPrintout">
+        <ul id="playerTable"></ul>
     </div>
 </body>
 </html>

@@ -32,8 +32,6 @@ const isNull = (isNullInput1, isNullInput2, isNullInput3, errorPrintLocationID) 
 const isPlayerHandleUnique = (isPlayerHandleUniqueInput) => {
     let uniqueTally = 0;
     playerArray.forEach((objInArray, i) => {
-        console.log(isPlayerHandleUniqueInput.value);
-        console.log(objInArray.player);
         if (isPlayerHandleUniqueInput.value === objInArray.player) {
             uniqueTally++;
         }
@@ -101,11 +99,8 @@ const validationSuite = (playerHandleInput, playerWinInput, playerLossInput, edi
 
 const percentage = (numerator, denominator) => {
     let wins = Number(numerator.value);
-    console.log(wins);
     let games = Number(numerator.value) + Number(denominator.value);
-    console.log(games);
     let result = wins / games;
-    console.log(result);
     result = result * 100;
     return result.toFixed(1);
 };
@@ -143,22 +138,37 @@ const editPlayerInArray = (editPlayerHandleInput, editPlayerWinInput, editPlayer
 const printList = () => {
     listOfPlayers = "";
     playerArray.forEach((objInArray, i) => {
-        console.log(objInArray.image)
         listOfPlayers += `
         <li class="listOfPlayers">
-        <img class="playerImages" src="${objInArray.image}" alt="">
-        <br>
-            <div class="cardTitle"> ${objInArray.player}
-            <div class="optionsIcons">
-            <input type="image" class="iconButton" src="./media/editicon.png" onclick="revealEditForm(${i}, '${objInArray.player}')">
-            <input type="image" class="iconButton" src="./media/removeicon.png" onclick="removePlayer(${i})">
+        <div class="imageHolder">
+        <img class="playerImages" src="./media/instagradient.png">
+        </div>
+        <div class="cardTextHolder">
+            <div class="cardTitleBar">
+                <div class="cardTitle">
+                    <font size="+3">${objInArray.player}</font>
+                </div>
+                <div class="cardButtons">
+                    <input type="image" class="iconButton" 
+                    src="./media/editicon.png" 
+                    onclick="revealEditForm(${i}, '${objInArray.player}', ${objInArray.image})"
+                    >
+                    <input type="image" class="iconButton" 
+                    src="./media/removeicon.png" 
+                    onclick="removePlayer(${i})"
+                    >
+                </div>
             </div>
+            <div class="cardStats">
+                <div class="cardWLRatio">
+                    <font size="+5"><strong>${objInArray.winPercentage}%</strong></font>
+                </div>
+                <div class="cardWAndL">
+                    ${objInArray.wins} Win/s<br>
+                    ${objInArray.losses} Loss/es
+                </div>
             </div>
-        <br><font size="+3"><strong>${objInArray.winPercentage}%</strong></font>
-        <br>win rate
-        <br><br>${objInArray.wins} Wins
-        <br>${objInArray.losses} Losses
-        <br><br>
+        </div>
         </li>
         `;
     });

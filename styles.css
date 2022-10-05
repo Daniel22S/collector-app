@@ -1,28 +1,29 @@
-html {
-    font-family: 'Abel';
-}
-
 body {
-    margin-left: 30vw;
-    margin-right: 30vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
     background-color: mediumseagreen;
     font-family: 'Abel', 'Trebuchet MS';
+    margin-left: 25vw;
+    margin-right: 25vw;
 }
 
-/* main {
-    position: fixed;
-    float: right;
-} */
+h1 {
+    text-align: center;
+    font-family: 'Comfortaa', 'Trebuchet MS';
+    color: white;
+}
+
+h3 {
+    text-align: center;
+    color: white;
+}
+
+div.playerPrintout {
+    padding-left: 20vw;
+}
 
 ul#playerTable{
     list-style-type: none;
     padding: 0;
     margin: 0;
-    position: relative;
-    float: right;
 }
 
 .errorList {
@@ -31,22 +32,84 @@ ul#playerTable{
 }
 
 li.listOfPlayers {
+    display: flex;
+    flex-direction: row;
     border-radius: 5px;
-    border: 2px;
     background-color: white;
     color: black;
     margin-bottom: 10px;
     padding: 5px;
     transition: 0.5s;
+    justify-content: space-between;
+    width: 430px;
+    height: 100px;
 }
 
-li.listOfPlayers:hover {
-    opacity: 95%;
-    transition: 0.5s;
+.cardTextHolder {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    flex-grow: 2;
+}
+
+.cardTitleBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-grow: 2;
+}
+
+.cardButtons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
+
+.iconButton {
+    padding: 5px;
+}
+
+.cardStats {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.cardWLRatio {
+    width: 180px;
+    justify-content: end;
+}
+
+.cardWAndL {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.imageHolder {
+    width: 100px;
+    height: 100px;
+    margin-right: 5px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
 .playerImages {
-    max-width: 100%;
+    max-width: 150%;
+    max-height: 150%;
+    border-radius: 50px;
+}
+
+main {
+    position: fixed;
+    right: 55vw;
+    margin-right: 10px;
 }
 
 .myForms {
@@ -59,17 +122,11 @@ li.listOfPlayers:hover {
 
 #editForm {
     display: none;
-    background-color: pink;
+    background-color: lightgray;
 }
 
 #nullErrorPrint {
     display: none;
-}
-
-.cardTitle {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
 }
 
 .iconButton:hover {

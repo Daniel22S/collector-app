@@ -24,7 +24,6 @@ function addPlayer (playerHandleInput, playerWinInput, playerLossInput, playerPi
     //Then need to add the player details to an array as an object (further subfunction)
     // + calculate the win/loss percentage and give that as a fourth key/value in the object
     addPlayerToArray(playerHandleInput, playerWinInput, playerLossInput, playerPictureInput, playerArray);
-    console.log(playerArray[0]);
     //Finally need to list the array into the unordered list with id="playerTable"
     printList();
 
@@ -61,27 +60,30 @@ const editPlayer = (playerHandleInput, playerWinInput, playerLossInput, playerPi
     };
 
     editPlayerInArray(playerHandleInput, playerWinInput, playerLossInput, playerPictureInput, playerArray, editedPlayerIndex);
-    console.log(playerArray[0]);
     //Finally need to list the array into the unordered list with id="playerTable"
     printList();
 };
 
-const revealEditForm = (revealEditFormIndex, playerHandle) => {
+const revealEditForm = (revealEditFormIndex, playerHandle, playerImage) => {
     document.getElementById("entryForm").style.display = "none";
     document.getElementById("editForm").style.display = "block";
     let editFormHTML = "";
     editFormHTML += `
-        <h2>Edit Player ${playerHandle}</h2>
+        <h2>Edit Player<br><font size="+3">${playerHandle}</font></h2>
+        <p class="errorList" id="editNullErrorPrint"></p>
         <label for="editPlayerHandleInput">Player Handle</label><br>
-        <input type="text name="editPlayerHandleInput" id="editPlayerHandleInput">
+        <input type="text name="editPlayerHandleInput" id="editPlayerHandleInput" maxlength="20">
         <p class="errorList" id="editPlayerHandleInputError"></p><br>
         <label for="editPlayerWinInput">Player Wins</label><br>
-        <input type="text" name="editPlayerWinInput" id="editPlayerWinInput">
+        <input type="text" name="editPlayerWinInput" id="editPlayerWinInput" maxlength="10">
         <p class="errorList" id="editPlayerWinInputError"></p><br>
         <label for="editPlayerLossInput">Player Losses</label><br>
-        <input type="text" name="editPlayerLossInput" id="editPlayerLossInput">
+        <input type="text" name="editPlayerLossInput" id="editPlayerLossInput" maxlength="10">
         <p class="errorList" id="editPlayerLossInputError"></p><br>
         <label for="editPlayerPictureInput">Player Picture</label><br>
+        <div class="imageHolder">
+            <img class="playerImages" src="${playerImage}">
+        </div>
         <input type="file" accept=".png, .jpg, .jpeg, .tiff, .svg, .ico"
         name="editPlayerPictureInput" id="editPlayerPictureInput">
         <input type="image" class="iconButton" src="./media/removeimageicon.png"
@@ -91,7 +93,9 @@ const revealEditForm = (revealEditFormIndex, playerHandle) => {
             value="Confirm Edit"
             name="editPlayerButton"
             id="button-edit"
-            onclick="editPlayer(editPlayerHandleInput, editPlayerWinInput, editPlayerLossInput, editPlayerPictureInput, 'nullErrorPrint', ${revealEditFormIndex})">
+            onclick="editPlayer(editPlayerHandleInput, editPlayerWinInput, 
+                editPlayerLossInput, editPlayerPictureInput, 'editNullErrorPrint', 
+                ${revealEditFormIndex})">
         <input
             type="button"
             value="Cancel Edit"
