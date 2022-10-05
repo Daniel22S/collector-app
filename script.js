@@ -84,7 +84,7 @@ const revealEditForm = (revealEditFormIndex, playerHandle) => {
         <label for="editPlayerPictureInput">Player Picture</label><br>
         <input type="file" accept=".png, .jpg, .jpeg, .tiff, .svg, .ico"
         name="editPlayerPictureInput" id="editPlayerPictureInput">
-        <input type="image" src="./media/removeimageicon.png"
+        <input type="image" class="iconButton" src="./media/removeimageicon.png"
             onclick="clearField(event, editPlayerPictureInput)"><br><br>
         <input
             type="button"

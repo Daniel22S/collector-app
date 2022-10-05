@@ -150,8 +150,8 @@ const printList = () => {
         <br>
             <div class="cardTitle"> ${objInArray.player}
             <div class="optionsIcons">
-            <input type="image" src="./media/editicon.png" onclick="revealEditForm(${i}, '${objInArray.player}')">
-            <input type="image" src="./media/removeicon.png" onclick="removePlayer(${i})">
+            <input type="image" class="iconButton" src="./media/editicon.png" onclick="revealEditForm(${i}, '${objInArray.player}')">
+            <input type="image" class="iconButton" src="./media/removeicon.png" onclick="removePlayer(${i})">
             </div>
             </div>
         <br><font size="+3"><strong>${objInArray.winPercentage}%</strong></font>

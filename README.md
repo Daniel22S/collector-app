@@ -63,6 +63,16 @@ Acceptance criteria:
  - The image is stored with the item so that when I leave the page and come back, it is still shown in the collection
 <hr>
 
+<!-- declare a reader as a new filReader
+make a blank variable
+when the reader 'onloads', set blank variable = reader.result
+reader.readasDataURL.(wherever the file is coming from).files[0]
+reader.readAsDataURL(document.forms["inputForm"]["cardPic"].files[0]);
+[pictureKey]:[blank variable name]
+when constructing list, add a div for holding the picture
+<div id=${"pictureId" + i}></div>
+then append the child image to the parent div -->
+
 ### ID: 2-6
 As a user ...<br>
 ... I want to edit the properties of items in my collection<br>
