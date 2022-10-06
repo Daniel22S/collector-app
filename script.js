@@ -62,12 +62,18 @@ const editPlayer = (playerHandleInput, playerWinInput, playerLossInput, playerPi
     editPlayerInArray(playerHandleInput, playerWinInput, playerLossInput, playerPictureInput, playerArray, editedPlayerIndex);
     //Finally need to list the array into the unordered list with id="playerTable"
     printList();
+    document.getElementById("player-index-"+editedPlayerIndex).style.backgroundColor = "white";
     mySelect.value = 'default';
 };
 
 const revealEditForm = (revealEditFormIndex, playerHandle, playerWins, playerLosses, playerImage) => {
     document.getElementById("entryForm").style.display = "none";
     document.getElementById("editForm").style.display = "block";
+    const listItems = document.querySelectorAll('.listOfPlayers');
+    listItems.forEach((item) => {
+        item.style.backgroundColor = "white";
+    });
+    document.getElementById("player-index-"+revealEditFormIndex).style.backgroundColor = "#D0ECF0";
     let editFormHTML = "";
     editFormHTML += `
         <h2>Edit Player<br><font size="+3">${playerHandle}</font></h2>
@@ -75,9 +81,9 @@ const revealEditForm = (revealEditFormIndex, playerHandle, playerWins, playerLos
             <img class="playerImages" src="${playerImage}">
         </div>
         <p class="errorList" id="editNullErrorPrint"></p>
-        <label for="editPlayerHandleInput">Player Name <em>(12 characters)</em></label><br>
+        <label for="editPlayerHandleInput">Player Name</label><br>
         <input type="text name="editPlayerHandleInput" id="editPlayerHandleInput" 
-            maxlength="12" value="${playerHandle}">
+            maxlength="22" value="${playerHandle}">
         <p class="errorList" id="editPlayerHandleInputError"></p><br>
         <label for="editPlayerWinInput">Player Wins</label><br>
         <input type="text" name="editPlayerWinInput" id="editPlayerWinInput"
@@ -90,7 +96,7 @@ const revealEditForm = (revealEditFormIndex, playerHandle, playerWins, playerLos
         <label for="editPlayerPictureInput">Player Picture</label><br>
         <input type="file" accept=".png, .jpg, .jpeg, .tiff, .svg, .ico"
         name="editPlayerPictureInput" id="editPlayerPictureInput">
-        <input type="image" class="iconButton" src="./media/removeimageicon.png"
+        <input type="image" class="iconButton" id="clearImageField" src="./media/removeimageicon.png"
         onclick="clearField(event, editPlayerPictureInput)">
         <br><br>
         <input
@@ -107,7 +113,7 @@ const revealEditForm = (revealEditFormIndex, playerHandle, playerWins, playerLos
             value="Cancel Edit"
             name="cancelEditPlayer"
             id="button-edit-cancel"
-            onclick="cancelEdit()"
+            onclick="cancelEdit(${revealEditFormIndex})"
         >
     `;
     document.getElementById("editForm").innerHTML = editFormHTML;
@@ -166,4 +172,15 @@ mySelect.onchange = () => {
             document.getElementById('player-index-2').style.backgroundColor = "#AD8A56";
             break;
         };
+};
+
+const addButton = document.getElementById("button-add");
+addButton.onclick = () => {
+	addPlayer(
+		document.getElementById('addPlayerHandleInput'),
+		document.getElementById('addPlayerWinInput'),
+		document.getElementById('addPlayerLossInput'),
+		document.getElementById('addPlayerPictureInput'),
+		"nullErrorPrint"
+	);
 };

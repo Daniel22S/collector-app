@@ -228,7 +228,9 @@ const printList = () => {
     localStorage.setItem('playerArrayKey',JSON.stringify(playerArray));
 };
 
-const cancelEdit = () => {
+const cancelEdit = (cancelEditIndex) => {
     document.getElementById("entryForm").style.display = "block";
     document.getElementById("editForm").style.display = "none";
+    document.getElementById("player-index-"+cancelEditIndex).style.backgroundColor = "white";
+
 };

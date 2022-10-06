@@ -105,8 +105,7 @@ li.listOfPlayers {
 }
 
 .playerImages {
-    flex-shrink: 0 ;
-    max-width: 200%;
+    max-width: 175%;
     min-height: 100%;
     max-height: 150%;
     border-radius: 50px;
@@ -129,7 +128,7 @@ main {
 
 #editForm {
     display: none;
-    background-color: lightgray;
+    background-color: #D0ECF0;
 }
 
 #nullErrorPrint {
@@ -138,7 +137,7 @@ main {
 
 .iconButton:hover {
     border-radius: 3px;
-    background-color: lightgray;
+    background-color: #D0ECF0;
     opacity: 75%;
     transition: 0.5s;
 }
