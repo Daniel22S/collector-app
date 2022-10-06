@@ -18,7 +18,7 @@
         <form class="myForms" id="entryForm">
             <h2>Add New Player</h2>
             <p class="errorList" id="nullErrorPrint"></p>
-            <label for="addPlayerHandleInput">Player Name</label><br>
+            <label for="addPlayerHandleInput">Player Name <em>(12 characters)</em></label><br>
             <input type="text" name="addPlayerHandleInput" id="addPlayerHandleInput" maxlength="12">
             <p class="errorList" id="addPlayerHandleInputError"></p><br>
             <label for="addPlayerWinInput">Player Wins</label><br>
@@ -31,9 +31,7 @@
             <input type="file" accept=".png, .jpg, .jpeg, .tiff, .svg, .ico" 
             name="addPlayerPictureInput" id="addPlayerPictureInput">
             <input type="image" class="iconButton" src="./media/removeimageicon.png"
-            onclick="clearField(event, addPlayerPictureInput)">
-            <input type="image" class="iconButton" src="./media/default.png" 
-            height="16px" width="16px" onclick="useDefaultImage(event)"><br><br>
+            onclick="clearField(event, addPlayerPictureInput)"><br><br>
             <input 
                 type="button" 
                 value="Add Player to Table" 

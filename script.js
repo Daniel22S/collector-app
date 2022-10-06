@@ -75,7 +75,7 @@ const revealEditForm = (revealEditFormIndex, playerHandle, playerWins, playerLos
             <img class="playerImages" src="${playerImage}">
         </div>
         <p class="errorList" id="editNullErrorPrint"></p>
-        <label for="editPlayerHandleInput">Player Name</label><br>
+        <label for="editPlayerHandleInput">Player Name <em>(12 characters)</em></label><br>
         <input type="text name="editPlayerHandleInput" id="editPlayerHandleInput" 
             maxlength="12" value="${playerHandle}">
         <p class="errorList" id="editPlayerHandleInputError"></p><br>
@@ -92,8 +92,7 @@ const revealEditForm = (revealEditFormIndex, playerHandle, playerWins, playerLos
         name="editPlayerPictureInput" id="editPlayerPictureInput">
         <input type="image" class="iconButton" src="./media/removeimageicon.png"
         onclick="clearField(event, editPlayerPictureInput)">
-        <input type="image" class="iconButton" src="./media/default.png" 
-        height="16px" width="16px" onclick="useDefaultImage(event)"><br><br>
+        <br><br>
         <input
             type="button"
             value="Confirm Edit"
@@ -141,6 +140,10 @@ mySelect.onchange = () => {
         case 'wins':
             console.log('Please sort by wins');
             playerArray.sort((a, b) => {
+                let gap = b.wins - a.wins;
+                if (gap === 0) {
+                    return b.winPercentage - a.winPercentage;
+                };
                 return b.wins - a.wins;
             });
             printList();
@@ -151,6 +154,10 @@ mySelect.onchange = () => {
         case 'winrate':
             console.log('Please sort by handle');
             playerArray.sort((a,b) => {
+                let gap = b.winPercentage - a.winPercentage;
+                if (gap === 0) {
+                    return b.wins - a.wins
+                };
                 return b.winPercentage - a.winPercentage;
             });
             printList();
