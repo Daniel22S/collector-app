@@ -105,7 +105,8 @@ li.listOfPlayers {
 }
 
 .playerImages {
-    max-width: 150%;
+    max-width: 175%;
+    min-height: 100%;
     max-height: 150%;
     border-radius: 50px;
 }
@@ -127,7 +128,7 @@ main {
 
 #editForm {
     display: none;
-    background-color: lightgray;
+    background-color: #D0ECF0;
 }
 
 #nullErrorPrint {
@@ -136,7 +137,25 @@ main {
 
 .iconButton:hover {
     border-radius: 3px;
-    background-color: lightgray;
+    background-color: #D0ECF0;
     opacity: 75%;
     transition: 0.5s;
+}
+
+div.sortField {
+    text-align: center;
+    border-radius: 5px;
+    border: 2px;
+    background-color: white;
+    color: black;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+div#addPicturePreviewHolder {
+    display: none;
+}
+
+div#editPicturePreviewHolder {
+    display: none;
 }

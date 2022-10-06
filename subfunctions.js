@@ -4,8 +4,9 @@ const changeColor = (changeColorElement, color) => {
 
 const clearField = (event, clearFieldInput) => {
     event.preventDefault();
-    document.getElementById(clearFieldInput.id).value = "";
+    document.getElementById(clearFieldInput.id).value = null;
 };``
+
 
 const readerReading = (pictureInputField) => {
     document.getElementById(pictureInputField) = reader.readAsDataURL(pictureInputField.files[0]);
@@ -21,11 +22,17 @@ let addDataURL;
 let editDataURL;
 addReader.onload = () => {
     addDataURL = addReader.result;
-    console.log(addDataURL);
 };
 editReader.onload = () => {
     editDataURL = editReader.result;
-    console.log(editDataURL);
+};
+
+let defaultImageURL = './media/default.png'
+
+const useDefaultImage = (event, previewElementID) => {
+    event.preventDefault();
+    addDataURL= defaultImageURL;
+    editDataURL= defaultImageURL;
 };
 
 const isNull = (isNullInput1, isNullInput2, isNullInput3, errorPrintLocationID) => {
@@ -66,7 +73,7 @@ const isPlayerHandleUnique = (isPlayerHandleUniqueInput) => {
 const isPlayerHandleValid = (playerHandleInput) => {
     //Here I want to check both that the handle is made up
     if (
-        /^[A-Za-z0-9 ]+$/.test(playerHandleInput.value)
+        /^[A-Za-z0-9 -]+$/.test(playerHandleInput.value)
         ) {
         return true;
     };
@@ -126,7 +133,6 @@ const percentage = (numerator, denominator) => {
     return result.toFixed(1);
 };
 
-let defaultImageURL = './media/default.png'
 
 const addPlayerToArray = (playerHandleInput, playerWinInput, playerLossInput, playerPictureInput, playerArray) => {
     if (!addDataURL) {
@@ -222,7 +228,9 @@ const printList = () => {
     localStorage.setItem('playerArrayKey',JSON.stringify(playerArray));
 };
 
-const cancelEdit = () => {
+const cancelEdit = (cancelEditIndex) => {
     document.getElementById("entryForm").style.display = "block";
     document.getElementById("editForm").style.display = "none";
+    document.getElementById("player-index-"+cancelEditIndex).style.backgroundColor = "white";
+
 };
