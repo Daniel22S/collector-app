@@ -1,4 +1,5 @@
 let playerArray = JSON.parse(localStorage.getItem('playerArrayKey')) || [];
+let mySelect = document.getElementById("sortByField");
 
 function addPlayer(playerHandleInput, playerWinInput, playerLossInput, playerPictureInput, errorPrintLocationID) {
     //First need to set up the constants and basic formatting required later on
@@ -26,7 +27,7 @@ function addPlayer(playerHandleInput, playerWinInput, playerLossInput, playerPic
     addPlayerToArray(playerHandleInput, playerWinInput, playerLossInput, playerPictureInput, playerArray);
     //Finally need to list the array into the unordered list with id="playerTable"
     printList();
-
+    mySelect.value = 'default';
     //Then return true idk
 };
 
@@ -58,14 +59,13 @@ const editPlayer = (playerHandleInput, playerWinInput, playerLossInput, playerPi
     if (!validationSuite(playerHandleInput, playerWinInput, playerLossInput, true)) {
         return false;
     };
-    console.log(editedPlayerIndex);
     editPlayerInArray(playerHandleInput, playerWinInput, playerLossInput, playerPictureInput, playerArray, editedPlayerIndex);
     //Finally need to list the array into the unordered list with id="playerTable"
     printList();
+    mySelect.value = 'default';
 };
 
 const revealEditForm = (revealEditFormIndex, playerHandle, playerWins, playerLosses, playerImage) => {
-    console.log(revealEditFormIndex);
     document.getElementById("entryForm").style.display = "none";
     document.getElementById("editForm").style.display = "block";
     let editFormHTML = "";
@@ -75,9 +75,9 @@ const revealEditForm = (revealEditFormIndex, playerHandle, playerWins, playerLos
             <img class="playerImages" src="${playerImage}">
         </div>
         <p class="errorList" id="editNullErrorPrint"></p>
-        <label for="editPlayerHandleInput">Player Handle</label><br>
+        <label for="editPlayerHandleInput">Player Name</label><br>
         <input type="text name="editPlayerHandleInput" id="editPlayerHandleInput" 
-            maxlength="20" value="${playerHandle}">
+            maxlength="12" value="${playerHandle}">
         <p class="errorList" id="editPlayerHandleInputError"></p><br>
         <label for="editPlayerWinInput">Player Wins</label><br>
         <input type="text" name="editPlayerWinInput" id="editPlayerWinInput"
@@ -91,7 +91,9 @@ const revealEditForm = (revealEditFormIndex, playerHandle, playerWins, playerLos
         <input type="file" accept=".png, .jpg, .jpeg, .tiff, .svg, .ico"
         name="editPlayerPictureInput" id="editPlayerPictureInput">
         <input type="image" class="iconButton" src="./media/removeimageicon.png"
-            onclick="clearField(event, editPlayerPictureInput)"><br><br>
+        onclick="clearField(event, editPlayerPictureInput)">
+        <input type="image" class="iconButton" src="./media/default.png" 
+        height="16px" width="16px" onclick="useDefaultImage(event)"><br><br>
         <input
             type="button"
             value="Confirm Edit"
@@ -99,17 +101,62 @@ const revealEditForm = (revealEditFormIndex, playerHandle, playerWins, playerLos
             id="button-edit"
             onclick="editPlayer(editPlayerHandleInput, editPlayerWinInput, 
                 editPlayerLossInput, editPlayerPictureInput, 'editNullErrorPrint', 
-                ${revealEditFormIndex})">
+                ${revealEditFormIndex})"
+        >
         <input
             type="button"
             value="Cancel Edit"
             name="cancelEditPlayer"
             id="button-edit-cancel"
-            onclick="cancelEdit()">
+            onclick="cancelEdit()"
+        >
     `;
     document.getElementById("editForm").innerHTML = editFormHTML;
     const editPictureInput = document.getElementById('editPlayerPictureInput');
     editPictureInput.onchange = () => {
         editReader.readAsDataURL(editPictureInput.files[0]);
     };
+};
+
+
+mySelect.onchange = () => {
+    console.log(mySelect.value);
+
+    switch (mySelect.value) {
+        case 'handle':
+            console.log('Please sort by handle');
+            playerArray.sort((a, b) => {
+                let ha = a.player.toLowerCase();
+                let hb = b.player.toLowerCase();
+                if (ha < hb) {
+                    return -1;
+                };
+                if (ha > hb) {
+                    return 1;
+                }
+                return 0;
+            });
+            printList();
+            break;
+        case 'wins':
+            console.log('Please sort by wins');
+            playerArray.sort((a, b) => {
+                return b.wins - a.wins;
+            });
+            printList();
+            document.getElementById('player-index-0').style.backgroundColor = "#C9B037";
+            document.getElementById('player-index-1').style.backgroundColor = "#D7D7D7";
+            document.getElementById('player-index-2').style.backgroundColor = "#AD8A56";
+            break;
+        case 'winrate':
+            console.log('Please sort by handle');
+            playerArray.sort((a,b) => {
+                return b.winPercentage - a.winPercentage;
+            });
+            printList();
+            document.getElementById('player-index-0').style.backgroundColor = "#C9B037";
+            document.getElementById('player-index-1').style.backgroundColor = "#D7D7D7";
+            document.getElementById('player-index-2').style.backgroundColor = "#AD8A56";
+            break;
+        };
 };
