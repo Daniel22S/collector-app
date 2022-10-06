@@ -128,6 +128,9 @@ const validationSuite = (playerHandleInput, playerWinInput, playerLossInput, edi
 const percentage = (numerator, denominator) => {
     let wins = Number(numerator.value);
     let games = Number(numerator.value) + Number(denominator.value);
+    if (games == 0) {
+        return "0"
+    }
     let result = wins / games;
     result = result * 100;
     return result.toFixed(1);
