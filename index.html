@@ -12,7 +12,7 @@
     <script defer src="./subfunctions.js"></script>
     <script defer src="./script.js"></script>
 </head>
-<body onload="printList()">
+<body id="top" onload="printList()">
     <main>
         <h1>Dan's<br> Games Table</h1>
         <form class="myForms" id="entryForm">
@@ -60,9 +60,13 @@
                 onclick="clearPlayers()"
                 >
         </div>
+        <div id="credits">
+            <p>Tool designed by Dan © 2022<br>All Rights Reserved<br>Patent Pending</p><br>
+            <a href="#top">Back to Top</a>    
+        </div>
     </main>
     <div class="playerPrintout">
-        <h3>A tool for tracking you and your mates' records head-to-head</h3>
+        <h3><br>A tool for tracking your records head-to-head</h3>
         <ul id="playerTable"></ul>
     </div>
 </body>
