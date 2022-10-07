@@ -30,6 +30,7 @@ const removePlayer = (removePlayerIndex) => {
 };
 
 const clearPlayers = () => {
+    mySelect.value = 'default';
     playerArray = [];
     printList();
 };
