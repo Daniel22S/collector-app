@@ -22,6 +22,9 @@ function addPlayer(playerHandleInput, playerWinInput, playerLossInput, playerPic
 };
 
 const removePlayer = (removePlayerIndex) => {
+    document.getElementById("entryForm").style.display = "block";
+    document.getElementById("editForm").style.display = "none";
+    mySelect.value = 'default';
     playerArray.splice(removePlayerIndex, 1);
     printList();
 };
@@ -108,6 +111,7 @@ const revealEditForm = (revealEditFormIndex, playerHandle, playerWins, playerLos
     editPictureInput.onchange = () => {
         editReader.readAsDataURL(editPictureInput.files[0]);
     };
+    mySelect.value = 'default';
 };
 
 
