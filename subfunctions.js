@@ -211,7 +211,7 @@ const printList = () => {
             </div>
             <div class="cardStats">
                 <div class="cardWLRatio">
-                    <font size="+5"><strong>${objInArray.winPercentage}%</strong></font>wins
+                    <font size="+5"><strong>${objInArray.winPercentage}%</strong></font><strong>wins</strong>
                 </div>
                 <div class="cardWAndL">
                     ${objInArray.wins} Win/s<br>
