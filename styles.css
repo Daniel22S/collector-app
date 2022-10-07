@@ -141,6 +141,10 @@ main {
 }
 
 div.sortField {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     border-radius: 5px;
     border: 2px;
