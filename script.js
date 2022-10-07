@@ -2,7 +2,6 @@ let playerArray = JSON.parse(localStorage.getItem('playerArrayKey')) || [];
 let mySelect = document.getElementById("sortByField");
 
 function addPlayer(playerHandleInput, playerWinInput, playerLossInput, playerPictureInput, errorPrintLocationID) {
-    //First need to set up the constants and basic formatting required later on
     changeColor(playerHandleInput, "white");
     changeColor(playerWinInput, "white");
     changeColor(playerLossInput, "white");
@@ -11,24 +10,15 @@ function addPlayer(playerHandleInput, playerWinInput, playerLossInput, playerPic
     document.getElementById(playerLossInput.id + "Error").innerHTML = "";
     document.getElementById(errorPrintLocationID).style.display = "none"
     document.getElementById(errorPrintLocationID).innerHTML = "";
-
-    //Then check that the boxes are not null (requires a subfunction)
     if (isNull(playerHandleInput, playerWinInput, playerLossInput, errorPrintLocationID)) {
         return false;
     };
-
-    //Then need to do validation on the form (require a subfunction)
     if (!validationSuite(playerHandleInput, playerWinInput, playerLossInput, false)) {
         return false;
     };
-
-    //Then need to add the player details to an array as an object (further subfunction)
-    // + calculate the win/loss percentage and give that as a fourth key/value in the object
     addPlayerToArray(playerHandleInput, playerWinInput, playerLossInput, playerPictureInput, playerArray);
-    //Finally need to list the array into the unordered list with id="playerTable"
     printList();
     mySelect.value = 'default';
-    //Then return true idk
 };
 
 const removePlayer = (removePlayerIndex) => {
@@ -51,16 +41,13 @@ const editPlayer = (playerHandleInput, playerWinInput, playerLossInput, playerPi
     document.getElementById(playerLossInput.id + "Error").innerHTML = "";
     document.getElementById(errorPrintLocationID).style.display = "none"
     document.getElementById(errorPrintLocationID).innerHTML = "";
-
     if (isNull(playerHandleInput, playerWinInput, playerLossInput, errorPrintLocationID)) {
         return false;
     };
-
     if (!validationSuite(playerHandleInput, playerWinInput, playerLossInput, true)) {
         return false;
     };
     editPlayerInArray(playerHandleInput, playerWinInput, playerLossInput, playerPictureInput, playerArray, editedPlayerIndex);
-    //Finally need to list the array into the unordered list with id="playerTable"
     printList();
     document.getElementById("player-index-"+editedPlayerIndex).style.backgroundColor = "white";
     mySelect.value = 'default';
@@ -81,7 +68,7 @@ const revealEditForm = (revealEditFormIndex, playerHandle, playerWins, playerLos
             <img class="playerImages" src="${playerImage}">
         </div>
         <p class="errorList" id="editNullErrorPrint"></p>
-        <label for="editPlayerHandleInput">Player Name</label><br>
+        <label for="editPlayerHandleInput">Player Handle</label><br>
         <input type="text name="editPlayerHandleInput" id="editPlayerHandleInput" 
             maxlength="22" value="${playerHandle}">
         <p class="errorList" id="editPlayerHandleInputError"></p><br>
@@ -126,7 +113,6 @@ const revealEditForm = (revealEditFormIndex, playerHandle, playerWins, playerLos
 
 mySelect.onchange = () => {
     console.log(mySelect.value);
-
     switch (mySelect.value) {
         case 'handle':
             console.log('Please sort by handle');

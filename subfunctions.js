@@ -71,7 +71,6 @@ const isPlayerHandleUnique = (isPlayerHandleUniqueInput) => {
 };
 
 const isPlayerHandleValid = (playerHandleInput) => {
-    //Here I want to check both that the handle is made up
     if (
         /^[A-Za-z0-9 -]+$/.test(playerHandleInput.value)
         ) {
@@ -81,7 +80,6 @@ const isPlayerHandleValid = (playerHandleInput) => {
 };
 
 const isPlayerWinsOrLossesValid = (isPlayerWinsOrLossesValidInput) => {
-    //Here I cam checking that the number entered is actually just a number
     if (/^[0-9]+$/.test(isPlayerWinsOrLossesValidInput.value)) {
         return true;
     };
@@ -91,11 +89,10 @@ const isPlayerWinsOrLossesValid = (isPlayerWinsOrLossesValidInput) => {
 const validationSuite = (playerHandleInput, playerWinInput, playerLossInput, editBoolean) => {
     let errorTally = 0;
     
-    //Need to validate the username as both valid and unique compared to previous entries
     if (isPlayerHandleValid(playerHandleInput)) {
     } else {
         changeColor(playerHandleInput, "pink")
-        document.getElementById(playerHandleInput.id + "Error").innerHTML += "Handle needs to be only Letters, Numbers, and Spaces <br>";
+        document.getElementById(playerHandleInput.id + "Error").innerHTML += "Handle needs to be only:<br> Letters, Numbers, Hyphens and Spaces <br>";
         errorTally++;
     };
     if (!isPlayerHandleUnique(playerHandleInput)
@@ -105,7 +102,6 @@ const validationSuite = (playerHandleInput, playerWinInput, playerLossInput, edi
         document.getElementById(playerHandleInput.id + "Error").innerHTML += "Handle needs to be unique<br>";
         errorTally++; 
     };
-    //Need to validate the wins and losses
     if (isPlayerWinsOrLossesValid(playerWinInput)) {
     } else {
         changeColor(playerWinInput, "pink")
@@ -122,7 +118,6 @@ const validationSuite = (playerHandleInput, playerWinInput, playerLossInput, edi
         return false;
     };
     return true;
-    //Need two subfunctions, isPlayerHandleValid() and isPlayerWinsOrLossesValid()
 };
 
 const percentage = (numerator, denominator) => {
