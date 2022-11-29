@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dan's Unit 2 Project</title>
+    <title>Daniel22S' poolPool</title>
+    <link rel="icon" type="image/x-icon" href="./media/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Abel&family=Comfortaa:wght@700&display=swap" rel="stylesheet">
@@ -12,13 +13,13 @@
     <script defer src="./subfunctions.js"></script>
     <script defer src="./script.js"></script>
 </head>
-<body onload="printList()">
+<body id="top" onload="printList()">
     <main>
-        <h1>Dan's<br> Games Table</h1>
+        <h1>poolPool</h1>
         <form class="myForms" id="entryForm">
             <h2>Add New Player</h2>
             <p class="errorList" id="nullErrorPrint"></p>
-            <label for="addPlayerHandleInput">Player Name</label><br>
+            <label for="addPlayerHandleInput">Player Handle</label><br>
             <input type="text" name="addPlayerHandleInput" id="addPlayerHandleInput" maxlength="22">
             <p class="errorList" id="addPlayerHandleInputError"></p><br>
             <label for="addPlayerWinInput">Player Wins</label><br>
@@ -31,39 +32,46 @@
             <input type="file" accept=".png, .jpg, .jpeg, .tiff, .svg, .ico" 
             name="addPlayerPictureInput" id="addPlayerPictureInput">
             <input type="image" class="iconButton" src="./media/removeimageicon.png"
-            ="clearField(event, addPlayerPictureInput)"><br><br>
+            onclick="clearField(event, addPlayerPictureInput)"><br><br>
             <input 
                 type="button" 
                 value="Add Player to Table" 
                 name="addPlayerButton" 
                 id="button-add"
                 >
-                <!-- onclick="addPlayer(addPlayerHandleInput, addPlayerWinInput, addPlayerLossInput, addPlayerPictureInput, 'nullErrorPrint')" -->
         </form>
         <form class="myForms" id="editForm">
                 
         </form>
         <div class="sortField">
-            <label for="sortByField">Sort By</label>
+            <label for="sortByField">Sort By&nbsp;</label>
             <select name="sortByField" id="sortByField">
                 <option value="default" selected="selected">Please Select Option</option>
-                <option value="handle">Player Name</option>
-                <option value="wins">Wins</option>
                 <option value="winrate">Win Rate</option>
+                <option value="wins">Wins</option>
+                <option value="handle">Player Name</option>
             </select>
         </div>
         <div class="sortField">
-            <input
+            Clear Table 
+            <input type="image" class="iconButton" name="clearTable" id="clearTable" src="./media/cleartableicon.png"
+                onclick="clearPlayers()">
+            <!-- <input
                 type="button"
                 value="Clear Table"
                 name="clearTable"
                 id="button-clear"
                 onclick="clearPlayers()"
-                >
+                > -->
+        </div>
+        <div id="credits">
+            <p>Made by Daniel22S 2022</p><br>
+            <a href="#top">Back to Top</a><br><br>
+            <a href="https://daniel22S.github.io/"><em>Back to Portfolio</em></a>    
         </div>
     </main>
     <div class="playerPrintout">
-        <h3>A tool for tracking you and your mates' records head-to-head</h3>
+        <h3><br>Track your 1-v-1 zero-sum game records</h3>
         <ul id="playerTable"></ul>
     </div>
 </body>

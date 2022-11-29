@@ -12,7 +12,6 @@ h1 {
 }
 
 h3 {
-    text-align: center;
     color: white;
     height: 70px;
     display: flex;
@@ -43,7 +42,7 @@ li.listOfPlayers {
     color: black;
     margin-bottom: 10px;
     padding: 5px;
-    transition: 0.5s;
+    transition: 0.3s;
     justify-content: space-between;
     width: 430px;
     height: 100px;
@@ -137,12 +136,15 @@ main {
 
 .iconButton:hover {
     border-radius: 3px;
-    background-color: #D0ECF0;
-    opacity: 75%;
-    transition: 0.5s;
+    background-color: lightgray;
+    transition: 0.3s;
 }
 
 div.sortField {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     border-radius: 5px;
     border: 2px;
@@ -158,4 +160,9 @@ div#addPicturePreviewHolder {
 
 div#editPicturePreviewHolder {
     display: none;
+}
+
+div#credits {
+    color: white;
+    text-align: center;
 }

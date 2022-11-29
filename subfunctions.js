@@ -71,7 +71,6 @@ const isPlayerHandleUnique = (isPlayerHandleUniqueInput) => {
 };
 
 const isPlayerHandleValid = (playerHandleInput) => {
-    //Here I want to check both that the handle is made up
     if (
         /^[A-Za-z0-9 -]+$/.test(playerHandleInput.value)
         ) {
@@ -81,7 +80,6 @@ const isPlayerHandleValid = (playerHandleInput) => {
 };
 
 const isPlayerWinsOrLossesValid = (isPlayerWinsOrLossesValidInput) => {
-    //Here I cam checking that the number entered is actually just a number
     if (/^[0-9]+$/.test(isPlayerWinsOrLossesValidInput.value)) {
         return true;
     };
@@ -91,11 +89,10 @@ const isPlayerWinsOrLossesValid = (isPlayerWinsOrLossesValidInput) => {
 const validationSuite = (playerHandleInput, playerWinInput, playerLossInput, editBoolean) => {
     let errorTally = 0;
     
-    //Need to validate the username as both valid and unique compared to previous entries
     if (isPlayerHandleValid(playerHandleInput)) {
     } else {
         changeColor(playerHandleInput, "pink")
-        document.getElementById(playerHandleInput.id + "Error").innerHTML += "Handle needs to be only Letters, Numbers, and Spaces <br>";
+        document.getElementById(playerHandleInput.id + "Error").innerHTML += "Handle needs to be only:<br> Letters, Numbers, Hyphens and Spaces <br>";
         errorTally++;
     };
     if (!isPlayerHandleUnique(playerHandleInput)
@@ -105,7 +102,6 @@ const validationSuite = (playerHandleInput, playerWinInput, playerLossInput, edi
         document.getElementById(playerHandleInput.id + "Error").innerHTML += "Handle needs to be unique<br>";
         errorTally++; 
     };
-    //Need to validate the wins and losses
     if (isPlayerWinsOrLossesValid(playerWinInput)) {
     } else {
         changeColor(playerWinInput, "pink")
@@ -122,12 +118,14 @@ const validationSuite = (playerHandleInput, playerWinInput, playerLossInput, edi
         return false;
     };
     return true;
-    //Need two subfunctions, isPlayerHandleValid() and isPlayerWinsOrLossesValid()
 };
 
 const percentage = (numerator, denominator) => {
     let wins = Number(numerator.value);
     let games = Number(numerator.value) + Number(denominator.value);
+    if (games == 0) {
+        return "0"
+    }
     let result = wins / games;
     result = result * 100;
     return result.toFixed(1);
@@ -213,7 +211,7 @@ const printList = () => {
             </div>
             <div class="cardStats">
                 <div class="cardWLRatio">
-                    <font size="+5"><strong>${objInArray.winPercentage}%</strong></font>
+                    <font size="+5"><strong>${objInArray.winPercentage}%</strong></font><strong>wins</strong>
                 </div>
                 <div class="cardWAndL">
                     ${objInArray.wins} Win/s<br>
