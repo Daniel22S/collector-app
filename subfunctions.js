@@ -72,7 +72,7 @@ const isPlayerHandleUnique = (isPlayerHandleUniqueInput) => {
 
 const isPlayerHandleValid = (playerHandleInput) => {
     if (
-        /^[A-Za-z0-9 -]+$/.test(playerHandleInput.value)
+        /^[A-Za-z0-9 '-]+$/.test(playerHandleInput.value)
         ) {
         return true;
     };
@@ -92,7 +92,7 @@ const validationSuite = (playerHandleInput, playerWinInput, playerLossInput, edi
     if (isPlayerHandleValid(playerHandleInput)) {
     } else {
         changeColor(playerHandleInput, "pink")
-        document.getElementById(playerHandleInput.id + "Error").innerHTML += "Handle needs to be only:<br> Letters, Numbers, Hyphens and Spaces <br>";
+        document.getElementById(playerHandleInput.id + "Error").innerHTML += "Handle needs to be only:<br> Letters, Numbers, Hyphens, Apostrophes, and Spaces <br>";
         errorTally++;
     };
     if (!isPlayerHandleUnique(playerHandleInput)
