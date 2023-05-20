@@ -1,6 +1,9 @@
-# Unit 2 Project
+# poolPool, a versus tracker
+A simple web app for tracking head-to-head results between friends (I hope)
 
-## Collector App
+Hosted here: https://danmsto.github.io/poolPool/
+
+## Collector App Unit 2 project at EyUp Coding Academy
 
 This is an individual project
 
