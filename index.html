@@ -1,70 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>poolPool - danmsto</title>
-    <link rel="icon" type="image/x-icon" href="./media/favicon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Abel&family=Comfortaa:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="icon" type="image/x-icon" href="./media/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Abel&family=Comfortaa:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
     <script defer src="./subfunctions.js"></script>
     <script defer src="./script.js"></script>
-</head>
-<body id="top" onload="printList()">
+  </head>
+  <body id="top" onload="printList()">
     <main>
-        <h1> <x-large>poolPool</x-large></h1>
-        <form class="myForms" id="entryForm">
-            <h2>Add New Player</h2>
-            <p class="errorList" id="nullErrorPrint"></p>
-            <label for="addPlayerHandleInput">Player Handle</label><br>
-            <input type="text" name="addPlayerHandleInput" id="addPlayerHandleInput" maxlength="22">
-            <p class="errorList" id="addPlayerHandleInputError"></p><br>
-            <label for="addPlayerWinInput">Player Wins</label><br>
-            <input type="text" name="addPlayerWinInput" id="addPlayerWinInput" maxlength="10">
-            <p class="errorList" id="addPlayerWinInputError"></p><br>
-            <label for="addPlayerLossInput">Player Losses</label><br>
-            <input type="text" name="addPlayerLossInput" id="addPlayerLossInput" maxlength="10">
-            <p class="errorList" id="addPlayerLossInputError"></p><br>
-            <label for="addPlayerPictureInput">Player Picture</label><br>
-            <input type="file" accept=".png, .jpg, .jpeg, .tiff, .svg, .ico" 
-            name="addPlayerPictureInput" id="addPlayerPictureInput">
-            <input type="image" class="iconButton" src="./media/removeimageicon.png" alt="removeImage"
-            onclick="clearField(event, addPlayerPictureInput)"><br><br>
-            <input 
-                type="button" 
-                value="Add Player to Table" 
-                name="addPlayerButton" 
-                id="button-add"
-                >
-        </form>
-        <form class="myForms" id="editForm">
-                
-        </form>
-        <div class="sortField">
-            <label for="sortByField">Sort By&nbsp;</label>
-            <select name="sortByField" id="sortByField">
-                <option value="default" selected="selected">Please Select Option</option>
-                <option value="winrate">Win Rate</option>
-                <option value="wins">Wins</option>
-                <option value="handle">Player Name</option>
-            </select>
-        </div>
-        <div class="sortField">
-            Clear Table 
-            <input type="image" class="iconButton" name="clearTable" id="clearTable" src="./media/cleartableicon.png" alt="clearTable"
-                onclick="clearPlayers()">
-        </div>
-        <div id="credits">
-            <p>To see my other projects click <a href="https://danmsto.github.io/portfolio">here</a></p><br>
-            <a href="#top">Back to Top</a><br><br>
-        </div>
+      <h1><x-large>poolpool</x-large></h1>
+      <form class="myForms" id="entryForm">
+        <h2>Add New Player</h2>
+        <p class="errorList" id="nullErrorPrint"></p>
+        <label for="addPlayerHandleInput">Player Handle</label><br />
+        <input
+          type="text"
+          name="addPlayerHandleInput"
+          id="addPlayerHandleInput"
+          maxlength="22"
+        />
+        <p class="errorList" id="addPlayerHandleInputError"></p>
+        <br />
+        <label for="addPlayerWinInput">Player Wins</label><br />
+        <input
+          type="text"
+          name="addPlayerWinInput"
+          id="addPlayerWinInput"
+          maxlength="10"
+        />
+        <p class="errorList" id="addPlayerWinInputError"></p>
+        <br />
+        <label for="addPlayerLossInput">Player Losses</label><br />
+        <input
+          type="text"
+          name="addPlayerLossInput"
+          id="addPlayerLossInput"
+          maxlength="10"
+        />
+        <p class="errorList" id="addPlayerLossInputError"></p>
+        <br />
+        <label for="addPlayerPictureInput">Player Picture</label><br />
+        <input
+          type="file"
+          accept=".png, .jpg, .jpeg, .tiff, .svg, .ico"
+          name="addPlayerPictureInput"
+          id="addPlayerPictureInput"
+        />
+        <input
+          type="image"
+          class="iconButton"
+          src="./media/removeimageicon.png"
+          alt="removeImage"
+          onclick="clearField(event, addPlayerPictureInput)"
+        /><br /><br />
+        <input
+          type="button"
+          value="Add Player to Table"
+          name="addPlayerButton"
+          id="button-add"
+        />
+      </form>
+      <form class="myForms" id="editForm"></form>
+      <div class="sortField">
+        <label for="sortByField">Sort By&nbsp;</label>
+        <select name="sortByField" id="sortByField">
+          <option value="default" selected="selected">
+            Please Select Option
+          </option>
+          <option value="winrate">Win Rate</option>
+          <option value="wins">Wins</option>
+          <option value="handle">Player Name</option>
+        </select>
+      </div>
+      <div class="sortField">
+        Clear Table
+        <input
+          type="image"
+          class="iconButton"
+          name="clearTable"
+          id="clearTable"
+          src="./media/cleartableicon.png"
+          alt="clearTable"
+          onclick="clearPlayers()"
+        />
+      </div>
+      <div id="credits">
+        <p>
+          To see my other projects click
+          <a href="https://danmsto.github.io/portfolio">here</a>
+        </p>
+        <br />
+        <a href="#top">Back to Top</a><br /><br />
+      </div>
     </main>
     <div class="playerPrintout">
-        <h3><br>Track your 1-v-1 zero-sum game records</h3>
-        <ul id="playerTable"></ul>
+      <h3><br />Track your versus game records</h3>
+      <ul id="playerTable"></ul>
     </div>
-</body>
+  </body>
 </html>

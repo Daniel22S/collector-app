@@ -1,194 +1,222 @@
 const changeColor = (changeColorElement, color) => {
-    document.getElementById(changeColorElement.id).style.backgroundColor = color;
+  document.getElementById(changeColorElement.id).style.backgroundColor = color;
 };
 
 const clearField = (event, clearFieldInput) => {
-    event.preventDefault();
-    document.getElementById(clearFieldInput.id).value = null;
-};``
-
+  event.preventDefault();
+  document.getElementById(clearFieldInput.id).value = null;
+};
 
 const readerReading = (pictureInputField) => {
-    document.getElementById(pictureInputField) = reader.readAsDataURL(pictureInputField.files[0]);
+  const reader = new FileReader();
+  reader.onload = () => {
+    document
+      .getElementById(pictureInputField)
+      .setAttribute("src", reader.result);
+  };
+  reader.readAsDataURL(pictureInputField.files[0]);
 };
 
 let addReader = new FileReader();
 let editReader = new FileReader();
-const addPictureInput = document.getElementById('addPlayerPictureInput');
+const addPictureInput = document.getElementById("addPlayerPictureInput");
 addPictureInput.onchange = () => {
-    addReader.readAsDataURL(addPictureInput.files[0]);
+  addReader.readAsDataURL(addPictureInput.files[0]);
 };
 let addDataURL;
 let editDataURL;
 addReader.onload = () => {
-    addDataURL = addReader.result;
+  addDataURL = addReader.result;
 };
 editReader.onload = () => {
-    editDataURL = editReader.result;
+  editDataURL = editReader.result;
 };
 
-let defaultImageURL = './media/default.png'
+let defaultImageURL = "./media/default.png";
 
 const useDefaultImage = (event, previewElementID) => {
-    event.preventDefault();
-    addDataURL= defaultImageURL;
-    editDataURL= defaultImageURL;
+  event.preventDefault();
+  addDataURL = defaultImageURL;
+  editDataURL = defaultImageURL;
 };
 
-const isNull = (isNullInput1, isNullInput2, isNullInput3, errorPrintLocationID) => {
-    let isNullTally = 0;
-    if (isNullInput1 == null || isNullInput1.value == '') {
-        changeColor(isNullInput1, "pink");
-        isNullTally++;
-    };
-    if (isNullInput2 == null || isNullInput2.value == '') {
-        changeColor(isNullInput2, "pink");
-        isNullTally++;
-    };
-    if (isNullInput3 == null || isNullInput3.value == '') {
-        changeColor(isNullInput3, "pink");
-        isNullTally++;
-    }
-    if (isNullTally !== 0) {
-        document.getElementById(errorPrintLocationID).style.display = "block"
-        document.getElementById(errorPrintLocationID).innerHTML += "Fill All Fields";
-        return true;
-    };
-    return false;
-};    
+const isNull = (
+  isNullInput1,
+  isNullInput2,
+  isNullInput3,
+  errorPrintLocationID
+) => {
+  let isNullTally = 0;
+  if (isNullInput1 == null || isNullInput1.value == "") {
+    changeColor(isNullInput1, "pink");
+    isNullTally++;
+  }
+  if (isNullInput2 == null || isNullInput2.value == "") {
+    changeColor(isNullInput2, "pink");
+    isNullTally++;
+  }
+  if (isNullInput3 == null || isNullInput3.value == "") {
+    changeColor(isNullInput3, "pink");
+    isNullTally++;
+  }
+  if (isNullTally !== 0) {
+    document.getElementById(errorPrintLocationID).style.display = "block";
+    document.getElementById(errorPrintLocationID).innerHTML +=
+      "Fill All Fields";
+    return true;
+  }
+  return false;
+};
 
 const isPlayerHandleUnique = (isPlayerHandleUniqueInput) => {
-    let uniqueTally = 0;
-    playerArray.forEach((objInArray, i) => {
-        if (isPlayerHandleUniqueInput.value === objInArray.player) {
-            uniqueTally++;
-        }
-    });
-    if (uniqueTally !== 0) {
-        return false;
-    };
-    return true;
+  let uniqueTally = 0;
+  playerArray.forEach((objInArray, i) => {
+    if (isPlayerHandleUniqueInput.value === objInArray.player) {
+      uniqueTally++;
+    }
+  });
+  if (uniqueTally !== 0) {
+    return false;
+  }
+  return true;
 };
 
 const isPlayerHandleValid = (playerHandleInput) => {
-    if (
-        /^[A-Za-z0-9 '-]+$/.test(playerHandleInput.value)
-        ) {
-        return true;
-    };
-    return false;
+  if (/^[A-Za-z0-9 '-]+$/.test(playerHandleInput.value)) {
+    return true;
+  }
+  return false;
 };
 
 const isPlayerWinsOrLossesValid = (isPlayerWinsOrLossesValidInput) => {
-    if (/^[0-9]+$/.test(isPlayerWinsOrLossesValidInput.value)) {
-        return true;
-    };
-    return false;
+  if (/^[0-9]+$/.test(isPlayerWinsOrLossesValidInput.value)) {
+    return true;
+  }
+  return false;
 };
 
-const validationSuite = (playerHandleInput, playerWinInput, playerLossInput, editBoolean) => {
-    let errorTally = 0;
-    
-    if (isPlayerHandleValid(playerHandleInput)) {
-    } else {
-        changeColor(playerHandleInput, "pink")
-        document.getElementById(playerHandleInput.id + "Error").innerHTML += "Handle needs to be only:<br> Letters, Numbers, Hyphens, Apostrophes, and Spaces <br>";
-        errorTally++;
-    };
-    if (!isPlayerHandleUnique(playerHandleInput)
-        && 
-        editBoolean === false) {
-        changeColor(playerHandleInput, "pink")
-        document.getElementById(playerHandleInput.id + "Error").innerHTML += "Handle needs to be unique<br>";
-        errorTally++; 
-    };
-    if (isPlayerWinsOrLossesValid(playerWinInput)) {
-    } else {
-        changeColor(playerWinInput, "pink")
-        document.getElementById(playerWinInput.id + "Error").innerHTML += "Wins needs to be a number <br>";
-        errorTally++;
-    };
-    if (isPlayerWinsOrLossesValid(playerLossInput)) {
-    } else {
-        changeColor(playerLossInput, "pink")
-        document.getElementById(playerLossInput.id + "Error").innerHTML += "Losses needs to be number <br>";
-        errorTally++;
-    };
-    if (errorTally !== 0) {
-        return false;
-    };
-    return true;
+const validationSuite = (
+  playerHandleInput,
+  playerWinInput,
+  playerLossInput,
+  editBoolean
+) => {
+  let errorTally = 0;
+
+  if (isPlayerHandleValid(playerHandleInput)) {
+  } else {
+    changeColor(playerHandleInput, "pink");
+    document.getElementById(playerHandleInput.id + "Error").innerHTML +=
+      "Handle needs to be only:<br> Letters, Numbers, Hyphens, Apostrophes, and Spaces <br>";
+    errorTally++;
+  }
+  if (!isPlayerHandleUnique(playerHandleInput) && editBoolean === false) {
+    changeColor(playerHandleInput, "pink");
+    document.getElementById(playerHandleInput.id + "Error").innerHTML +=
+      "Handle needs to be unique<br>";
+    errorTally++;
+  }
+  if (isPlayerWinsOrLossesValid(playerWinInput)) {
+  } else {
+    changeColor(playerWinInput, "pink");
+    document.getElementById(playerWinInput.id + "Error").innerHTML +=
+      "Wins needs to be a number <br>";
+    errorTally++;
+  }
+  if (isPlayerWinsOrLossesValid(playerLossInput)) {
+  } else {
+    changeColor(playerLossInput, "pink");
+    document.getElementById(playerLossInput.id + "Error").innerHTML +=
+      "Losses needs to be number <br>";
+    errorTally++;
+  }
+  if (errorTally !== 0) {
+    return false;
+  }
+  return true;
 };
 
 const percentage = (numerator, denominator) => {
-    let wins = Number(numerator.value);
-    let games = Number(numerator.value) + Number(denominator.value);
-    if (games == 0) {
-        return "0"
-    }
-    let result = wins / games;
-    result = result * 100;
-    return result.toFixed(1);
+  let wins = Number(numerator.value);
+  let games = Number(numerator.value) + Number(denominator.value);
+  if (games == 0) {
+    return "0";
+  }
+  let result = wins / games;
+  result = result * 100;
+  return result.toFixed(1);
 };
 
-
-const addPlayerToArray = (playerHandleInput, playerWinInput, playerLossInput, playerPictureInput, playerArray) => {
-    if (!addDataURL) {
-        playerArray.push({
-            image: defaultImageURL,
-            player: playerHandleInput.value,
-            wins: playerWinInput.value,
-            losses: playerLossInput.value,
-            winPercentage: percentage(playerWinInput, playerLossInput)
-        });
-    } else {
-        playerArray.push({
-            image: addDataURL,
-            player: playerHandleInput.value,
-            wins: playerWinInput.value,
-            losses: playerLossInput.value,
-            winPercentage: percentage(playerWinInput, playerLossInput)
-        })
-    };
-    clearField(event, playerHandleInput);
-    clearField(event, playerWinInput);
-    clearField(event, playerLossInput);
-    clearField(event, playerPictureInput);
-    addDataURL = null;
+const addPlayerToArray = (
+  playerHandleInput,
+  playerWinInput,
+  playerLossInput,
+  playerPictureInput,
+  playerArray
+) => {
+  if (!addDataURL) {
+    playerArray.push({
+      image: defaultImageURL,
+      player: playerHandleInput.value,
+      wins: playerWinInput.value,
+      losses: playerLossInput.value,
+      winPercentage: percentage(playerWinInput, playerLossInput),
+    });
+  } else {
+    playerArray.push({
+      image: addDataURL,
+      player: playerHandleInput.value,
+      wins: playerWinInput.value,
+      losses: playerLossInput.value,
+      winPercentage: percentage(playerWinInput, playerLossInput),
+    });
+  }
+  clearField(event, playerHandleInput);
+  clearField(event, playerWinInput);
+  clearField(event, playerLossInput);
+  clearField(event, playerPictureInput);
+  addDataURL = null;
 };
 
-const editPlayerInArray = (editPlayerHandleInput, editPlayerWinInput, editPlayerLossInput, editPlayerPictureInput, playerArray, editedPlayerIndex) => {
-    let originalPlayerPicture = playerArray[editedPlayerIndex].image;
-    if (editDataURL) {
-        playerArray.splice(editedPlayerIndex, 1, {
-            image: editDataURL,
-            player: editPlayerHandleInput.value,
-            wins: editPlayerWinInput.value,
-            losses: editPlayerLossInput.value,
-            winPercentage: percentage(editPlayerWinInput, editPlayerLossInput)
-        });
-    } else {
-        playerArray.splice(editedPlayerIndex, 1, {
-            image: originalPlayerPicture,
-            player: editPlayerHandleInput.value,
-            wins: editPlayerWinInput.value,
-            losses: editPlayerLossInput.value,
-            winPercentage: percentage(editPlayerWinInput, editPlayerLossInput)
-        });
-    };
-    clearField(event, editPlayerHandleInput);
-    clearField(event, editPlayerWinInput);
-    clearField(event, editPlayerLossInput);
-    clearField(event, editPlayerPictureInput);
-    document.getElementById("entryForm").style.display = "block";
-    document.getElementById("editForm").style.display = "none";
-    editDataURL = null;
+const editPlayerInArray = (
+  editPlayerHandleInput,
+  editPlayerWinInput,
+  editPlayerLossInput,
+  editPlayerPictureInput,
+  playerArray,
+  editedPlayerIndex
+) => {
+  let originalPlayerPicture = playerArray[editedPlayerIndex].image;
+  if (editDataURL) {
+    playerArray.splice(editedPlayerIndex, 1, {
+      image: editDataURL,
+      player: editPlayerHandleInput.value,
+      wins: editPlayerWinInput.value,
+      losses: editPlayerLossInput.value,
+      winPercentage: percentage(editPlayerWinInput, editPlayerLossInput),
+    });
+  } else {
+    playerArray.splice(editedPlayerIndex, 1, {
+      image: originalPlayerPicture,
+      player: editPlayerHandleInput.value,
+      wins: editPlayerWinInput.value,
+      losses: editPlayerLossInput.value,
+      winPercentage: percentage(editPlayerWinInput, editPlayerLossInput),
+    });
+  }
+  clearField(event, editPlayerHandleInput);
+  clearField(event, editPlayerWinInput);
+  clearField(event, editPlayerLossInput);
+  clearField(event, editPlayerPictureInput);
+  document.getElementById("entryForm").style.display = "block";
+  document.getElementById("editForm").style.display = "none";
+  editDataURL = null;
 };
 
 const printList = () => {
-    listOfPlayers = "";
-    playerArray.forEach((objInArray, i) => {
-        listOfPlayers += `
+  listOfPlayers = "";
+  playerArray.forEach((objInArray, i) => {
+    listOfPlayers += `
         <li class="listOfPlayers" id="player-index-${i}">
         <div class="imageHolder">
         <img class="playerImages" src="${objInArray.image}">
@@ -221,14 +249,15 @@ const printList = () => {
         </div>
         </li>
         `;
-    });
-    document.getElementById("playerTable").innerHTML = listOfPlayers;
-    localStorage.setItem('playerArrayKey',JSON.stringify(playerArray));
+  });
+  document.getElementById("playerTable").innerHTML = listOfPlayers;
+  localStorage.setItem("playerArrayKey", JSON.stringify(playerArray));
 };
 
 const cancelEdit = (cancelEditIndex) => {
-    document.getElementById("entryForm").style.display = "block";
-    document.getElementById("editForm").style.display = "none";
-    document.getElementById("player-index-"+cancelEditIndex).style.backgroundColor = "white";
-
+  document.getElementById("entryForm").style.display = "block";
+  document.getElementById("editForm").style.display = "none";
+  document.getElementById(
+    "player-index-" + cancelEditIndex
+  ).style.backgroundColor = "white";
 };

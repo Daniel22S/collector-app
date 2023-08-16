@@ -1,168 +1,168 @@
 body {
-    background-color: mediumseagreen;
-    font-family: 'Abel', 'Trebuchet MS';
-    margin-left: 25vw;
-    margin-right: 25vw;
+  background-color: mediumseagreen;
+  font-family: "Abel", "Trebuchet MS";
+  margin-left: 25vw;
+  margin-right: 25vw;
 }
 
 h1 {
-    text-align: center;
-    font-family: 'Comfortaa', 'Trebuchet MS';
-    color: white;
+  text-align: center;
+  font-family: "Comfortaa", "Trebuchet MS";
+  color: white;
 }
 
 h3 {
-    color: white;
-    height: 38px;
-    display: flex;
-    justify-content: baseline;
+  color: white;
+  height: 38px;
+  display: flex;
+  justify-content: baseline;
 }
 
 div.playerPrintout {
-    padding-left: 20vw;
-    padding-top: 5px;
+  padding-left: 20vw;
+  padding-top: 5px;
 }
 
-ul#playerTable{
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+ul#playerTable {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 .errorList {
-    color: pink;
-    font-size: small;
+  color: pink;
+  font-size: small;
 }
 
 li.listOfPlayers {
-    display: flex;
-    flex-direction: row;
-    border-radius: 5px;
-    background-color: white;
-    color: black;
-    margin-bottom: 10px;
-    padding: 5px;
-    transition: 0.3s;
-    justify-content: space-between;
-    width: 430px;
-    height: 100px;
+  display: flex;
+  flex-direction: row;
+  border-radius: 5px;
+  background-color: white;
+  color: black;
+  margin-bottom: 10px;
+  padding: 5px;
+  transition: 0.3s;
+  justify-content: space-between;
+  width: 430px;
+  height: 100px;
 }
 
 .cardTextHolder {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: space-between;
-    flex-grow: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-grow: 2;
 }
 
 .cardTitleBar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-grow: 2;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-grow: 2;
 }
 
 .cardButtons {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-    flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  flex-grow: 1;
 }
 
 .iconButton {
-    padding: 5px;
+  padding: 5px;
 }
 
 .cardStats {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 .cardWLRatio {
-    width: 180px;
-    justify-content: end;
+  width: 180px;
+  justify-content: end;
 }
 
 .cardWAndL {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .imageHolder {
-    width: 100px;
-    height: 100px;
-    margin-right: 5px;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+  width: 100px;
+  height: 100px;
+  margin-right: 5px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
 .playerImages {
-    max-width: 175%;
-    min-height: 100%;
-    max-height: 150%;
-    border-radius: 50px;
+  max-width: 175%;
+  min-height: 100%;
+  max-height: 150%;
+  border-radius: 50px;
 }
 
 main {
-    position: fixed;
-    right: 55vw;
-    margin-right: 10px;
-    overflow-wrap: normal;
+  position: fixed;
+  right: 55vw;
+  margin-right: 10px;
+  overflow-wrap: normal;
 }
 
 .myForms {
-    border-radius: 5px;
-    border: 2px;
-    background-color: white;
-    color: black;
-    padding: 5px;
+  border-radius: 5px;
+  border: 2px;
+  background-color: white;
+  color: black;
+  padding: 5px;
 }
 
 #editForm {
-    display: none;
-    background-color: #D0ECF0;
+  display: none;
+  background-color: #d0ecf0;
 }
 
 #nullErrorPrint {
-    display: none;
+  display: none;
 }
 
 .iconButton:hover {
-    border-radius: 3px;
-    background-color: lightgray;
-    transition: 0.3s;
+  border-radius: 3px;
+  background-color: lightgray;
+  transition: 0.3s;
 }
 
 div.sortField {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-radius: 5px;
-    border: 2px;
-    background-color: white;
-    color: black;
-    padding: 5px;
-    margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 5px;
+  border: 2px;
+  background-color: white;
+  color: black;
+  padding: 5px;
+  margin-top: 10px;
 }
 
 div#addPicturePreviewHolder {
-    display: none;
+  display: none;
 }
 
 div#editPicturePreviewHolder {
-    display: none;
+  display: none;
 }
 
 div#credits {
-    color: white;
-    text-align: center;
+  color: white;
+  text-align: center;
 }
