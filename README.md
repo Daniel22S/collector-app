@@ -1,7 +1,7 @@
-# poolPool, a versus tracker
+# poolpool, a versus tracker
 A simple web app for tracking head-to-head results between friends (I hope)
 
-Hosted here: https://danmsto.github.io/poolPool/
+Hosted here: https://danmsto.github.io/poolpool/
 
 ## Collector App Unit 2 project at EyUp Coding Academy
 
